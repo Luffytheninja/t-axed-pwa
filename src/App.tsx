@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { calculateTaxResults, fetchExchangeRates } from './utils';
 import { IncomeEntry, ExpenseEntry, TaxResults, UserCategory } from './types';
 import {
@@ -288,6 +289,7 @@ export default function App() {
 
             <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
             <TutorialOverlay isOpen={showTutorial} onClose={() => setShowTutorial(false)} />
+            <Analytics />
         </div>
     );
 }
