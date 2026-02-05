@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #F9F9F8;
+  --color-ink: #121212;
+  --color-accent: #0047FF;
+  --color-rupture: #FF1F00;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --spacing-grid: 1rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@utility grid-lines {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: var(--spacing-grid) var(--spacing-grid);
+}
+
+@utility container-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-grid);
+  @apply px-4 sm:px-8;
+}
+
+@layer components {
+  .nav-link {
+    @apply font-mono text-xs uppercase tracking-widest hover:text-accent transition-colors;
+  }
+
+  .rupture-transition {
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@utility dashed-grid {
+  background-image: radial-gradient(circle, rgba(18, 18, 18, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@utility dashed-grid-rupture {
+  background-image: radial-gradient(circle, rgba(255, 31, 0, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink);
+}

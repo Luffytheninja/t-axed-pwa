@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+__pycache__/
+*.pyc
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.turbo/
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Bloat & Temporary Files
+*.zip
+*.tar
+*.gz
+*.rar
+ERROR_LOG.md
+t_axed_temp/
+ReviewAlerts.tsx
+.agent/

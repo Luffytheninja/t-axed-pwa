@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kroma Studio | Digital Identity & Design</title>
+    <meta name="description"
+        content="Kroma is a strategic creative studio focusing on visual identity, UI design, and digital products.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="nav-frame">
+            <div class="nav-logo">Kroma</div>
+            <div class="nav-links-desktop">
+                <a href="#work">Work</a>
+                <a href="#studio">Studio</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Open Menu">
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+            </button>
+        </nav>
+
+        <!-- Menu Overlay (Mobile) -->
+        <div class="menu-overlay">
+            <div class="menu-content">
+                <ul class="menu-links">
+                    <li><a href="#work" class="menu-link">Work</a></li>
+                    <li><a href="#studio" class="menu-link">Studio</a></li>
+                    <li><a href="#contact" class="menu-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <main class="content-wrapper" id="mainContent">
+
+            <!-- Hero / Intro -->
+            <section class="section-hero">
+                <h1 class="hero-headline">
+                    <span class="line-wrapper"><span class="reveal-text">Designing with</span></span>
+                    <span class="line-wrapper"><span class="reveal-text">intent and clarity.</span></span>
+                </h1>
+                <p class="hero-subtext">
+                    We build digital products and visual identities that cut through the noise.
+                </p>
+            </section>
+
+            <!-- What We Do -->
+            <section class="section-services" id="studio">
+                <div class="section-header">
+                    <h2>What We Do</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Digital Products</h3>
+                        <p>Websites, web apps, and digital experiences built for performance and scale.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Visual Identity</h3>
+                        <p>Comprehensive branding systems that communicate your core values.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Strategy</h3>
+                        <p>Defining the path forward through research, insight, and positioning.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Selected Work -->
+            <section class="section-work" id="work">
+                <div class="section-header">
+                    <h2>Selected Work</h2>
+                </div>
+                <div class="work-list">
+                    <article class="work-item">
+                        <div class="work-image-wrapper">
+                            <!-- Placeholder image via CSS or a solid color block for now to match style -->
+                            <div class="placeholder-img" style="background-color: #D1D8C8;"></div>
+                        </div>
+                        <div class="work-info">
+                            <h3>Lumina</h3>
+                            <span class="work-cat">Identity / Web</span>
+                        </div>
+                    </article>
+                    <article class="work-item">
+                        <div class="work-image-wrapper">
+                            <div class="placeholder-img" style="background-color: #B8C2B3;"></div>
+                        </div>
+                        <div class="work-info">
+                            <h3>Apex Architecture</h3>
+                            <span class="work-cat">Digital Platform</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Design System Statement -->
+            <section class="section-statement">
+                <div class="statement-content">
+                    <h2>Design as a system, <br>not a surface.</h2>
+                    <a href="#philosophy" class="link-underline">Read our philosophy</a>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section class="section-about">
+                <div class="section-header">
+                    <h2>About the Studio</h2>
+                    <p class="about-lead">Small team, big impact. We partner with founders who value craft.</p>
+                </div>
+            </section>
+
+            <!-- Contact / Footer -->
+            <section class="section-contact" id="contact">
+                <div class="contact-inner">
+                    <h2>Have something <br>worth building?</h2>
+                    <a href="mailto:hello@kroma.studio" class="cta-primary dark">
+                        <span class="cta-label">Start a Project</span>
+                        <div class="cta-background"></div>
+                    </a>
+                </div>
+                <footer class="site-footer">
+                    <div class="footer-meta">
+                        <span>© 2026 Kroma Studio</span>
+                        <div class="socials">
+                            <a href="#">Twitter</a>
+                            <a href="#">Instagram</a>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+
+        </main>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

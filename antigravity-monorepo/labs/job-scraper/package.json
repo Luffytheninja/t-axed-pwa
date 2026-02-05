@@ -1,0 +1,10 @@
+{
+    "name": "@antigravity/job-scraper",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "echo 'Run python script manually: python app.py'",
+        "build": "echo 'No build step for python scripts'",
+        "start": "python app.py"
+    }
+}
