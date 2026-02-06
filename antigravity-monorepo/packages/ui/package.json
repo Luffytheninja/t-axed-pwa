@@ -14,7 +14,8 @@
         "clsx": "latest",
         "tailwind-merge": "latest",
         "class-variance-authority": "latest",
-        "@radix-ui/react-slot": "latest"
+        "@radix-ui/react-slot": "latest",
+        "@antigravity/tokens": "workspace:*"
     },
     "devDependencies": {
         "@types/react": "latest",

@@ -14,12 +14,7 @@ import { LayoutDashboard, Receipt, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Home() {
-  const {
-    incomeEntries,
-    expenseEntries,
-    userData,
-    userCategory
-  } = useBookkeeping();
+  const { incomeEntries, expenseEntries, userData, userCategory } = useBookkeeping();
 
   const [activeTab, setActiveTab] = useState<'dash' | 'book' | 'insights'>('dash');
 
@@ -37,7 +32,7 @@ export default function Home() {
     expenseEntries,
     userData.voluntaryPension,
     userData.mortgageInterest,
-    userCategory
+    userCategory,
   );
 
   return (
@@ -46,7 +41,9 @@ export default function Home() {
         {/* Header */}
         <header className="flex justify-between items-center py-8">
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-500 font-black">BookNGN Protocol</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-500 font-black">
+              BookNGN Protocol
+            </span>
             <h1 className="text-2xl font-black tracking-tighter">Fiscal Command</h1>
           </div>
           <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center rotate-3 overflow-hidden">
@@ -74,13 +71,17 @@ export default function Home() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="glass-card p-4 rounded-2xl border-white/5">
-                    <div className="text-[9px] uppercase tracking-widest opacity-40 mb-1">Total Tracked</div>
+                    <div className="text-[9px] uppercase tracking-widest opacity-40 mb-1">
+                      Total Tracked
+                    </div>
                     <div className="text-lg font-bold font-mono">
                       <AnimatedNumber value={results.totalTrackedIncome} currency />
                     </div>
                   </div>
                   <div className="glass-card p-4 rounded-2xl border-white/5">
-                    <div className="text-[9px] uppercase tracking-widest opacity-40 mb-1">Deductions</div>
+                    <div className="text-[9px] uppercase tracking-widest opacity-40 mb-1">
+                      Deductions
+                    </div>
                     <div className="text-lg font-bold font-mono text-emerald-400">
                       <AnimatedNumber value={results.totalDeductions} currency />
                     </div>
@@ -98,35 +99,47 @@ export default function Home() {
 
                 {/* Recent Activity List */}
                 <div className="space-y-3">
-                  <h3 className="text-[10px] uppercase tracking-widest opacity-60 ml-2">Recent Ledger</h3>
+                  <h3 className="text-[10px] uppercase tracking-widest opacity-60 ml-2">
+                    Recent Ledger
+                  </h3>
                   {[...incomeEntries, ...expenseEntries]
                     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                     .slice(0, 8)
-                    .map(e => (
+                    .map((e) => (
                       <div
                         key={e.id}
                         className="bg-black/30 border border-white/5 p-4 rounded-2xl flex justify-between items-center"
                       >
                         <div className="flex gap-3 items-center">
-                          <div className={cn(
-                            "w-1.5 h-1.5 rounded-full",
-                            'exchangeRate' in e ? "bg-emerald-500" : "bg-red-500"
-                          )} />
+                          <div
+                            className={cn(
+                              'w-1.5 h-1.5 rounded-full',
+                              'exchangeRate' in e ? 'bg-emerald-500' : 'bg-red-500',
+                            )}
+                          />
                           <div>
-                            <div className="font-bold text-sm leading-none mb-1">{e.description}</div>
-                            <div className="text-[10px] opacity-40">{new Date(e.date).toLocaleDateString()}</div>
+                            <div className="font-bold text-sm leading-none mb-1">
+                              {e.description}
+                            </div>
+                            <div className="text-[10px] opacity-40">
+                              {new Date(e.date).toLocaleDateString()}
+                            </div>
                           </div>
                         </div>
-                        <div className={cn(
-                          "font-mono font-bold text-sm",
-                          'exchangeRate' in e ? "text-emerald-500" : "text-red-400"
-                        )}>
+                        <div
+                          className={cn(
+                            'font-mono font-bold text-sm',
+                            'exchangeRate' in e ? 'text-emerald-500' : 'text-red-400',
+                          )}
+                        >
                           {'exchangeRate' in e ? '+' : '-'}₦{Number(e.amount).toLocaleString()}
                         </div>
                       </div>
                     ))}
                   {incomeEntries.length === 0 && expenseEntries.length === 0 && (
-                    <div className="text-center py-12 opacity-30 text-xs italic">The ledger is empty. Start tracking above.</div>
+                    <div className="text-center py-12 opacity-30 text-xs italic">
+                      The ledger is empty. Start tracking above.
+                    </div>
                   )}
                 </div>
               </div>
@@ -139,9 +152,9 @@ export default function Home() {
                 <div className="glass-card p-6 rounded-warm border-white/5 space-y-4">
                   <h3 className="text-sm font-bold tracking-tight">Strategy Center</h3>
                   <p className="text-xs opacity-60 leading-relaxed">
-                    Your current effective tax rate is {results.effectiveRate.toFixed(1)}%.
-                    To drop this below 10%, consider increasing your NHF voluntary contributions
-                    or optimizing documented business utilities.
+                    Your current effective tax rate is {results.effectiveRate.toFixed(1)}%. To drop
+                    this below 10%, consider increasing your NHF voluntary contributions or
+                    optimizing documented business utilities.
                   </p>
                   <button className="w-full py-3 bg-white/5 hover:bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-colors">
                     Generate Full Tax Audit
@@ -164,10 +177,10 @@ export default function Home() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
             className={cn(
-              "flex-1 py-3 rounded-full flex flex-col items-center gap-1 transition-all duration-300",
+              'flex-1 py-3 rounded-full flex flex-col items-center gap-1 transition-all duration-300',
               activeTab === tab.id
-                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/40"
-                : "text-white/40 hover:text-white"
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/40'
+                : 'text-white/40 hover:text-white',
             )}
           >
             <tab.icon size={18} />

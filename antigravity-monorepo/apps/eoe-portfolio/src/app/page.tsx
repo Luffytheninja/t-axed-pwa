@@ -1,9 +1,8 @@
-
-import { projects } from '@/lib/data'
-import { AsymmetricalGrid } from '@/components/AsymmetricalGrid'
+import { projects } from '@/lib/data';
+import { AsymmetricalGrid } from '@/components/AsymmetricalGrid';
 
 export default function Home() {
-  const featuredProjects = projects.slice(0, 8)
+  const featuredProjects = projects.slice(0, 8);
 
   return (
     <div className="pt-48 pb-32 px-6 max-w-[1400px] mx-auto">
@@ -16,8 +15,8 @@ export default function Home() {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
           <p className="text-lg text-muted max-w-md leading-relaxed">
-            Operating at the intersection of Photography, Painting, and Design.
-            We build timeless experiences for cultural institutions and enduring brands.
+            Operating at the intersection of Photography, Painting, and Design. We build timeless
+            experiences for cultural institutions and enduring brands.
           </p>
           <div className="flex flex-col gap-2 border-l border-border pl-6">
             <span className="text-micro text-muted">Core Disciplines</span>
@@ -39,10 +38,13 @@ export default function Home() {
       {/* Footer-like statement */}
       <section className="mt-64 text-center py-32 border-t border-border/40">
         <p className="text-micro text-muted mb-8 tracking-[0.2em]">Contact</p>
-        <a href="mailto:hello@eoe.brand" className="text-3xl md:text-5xl hover:opacity-50 transition-opacity tracking-tight font-medium">
+        <a
+          href="mailto:hello@eoe.brand"
+          className="text-3xl md:text-5xl hover:opacity-50 transition-opacity tracking-tight font-medium"
+        >
           hello@eoe.brand
         </a>
       </section>
     </div>
-  )
+  );
 }

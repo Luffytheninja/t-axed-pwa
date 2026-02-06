@@ -1,34 +1,34 @@
-import { useMemo } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AppLayout } from '@/components/AppLayout'
-import { EmptyState } from '@/components/EmptyState'
-import { PhaseWarningBanner } from '@/components/PhaseWarningBanner'
-import { SpecCard } from '@/components/SpecCard'
-import { DataCard } from '@/components/DataCard'
-import { StepIndicator, type StepStatus } from '@/components/StepIndicator'
-import { loadProductData } from '@/lib/product-loader'
-import { loadSectionData } from '@/lib/section-loader'
-import { ChevronRight, Layout, Image, Download, ArrowRight, LayoutList } from 'lucide-react'
+import { useMemo } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AppLayout } from '@/components/AppLayout';
+import { EmptyState } from '@/components/EmptyState';
+import { PhaseWarningBanner } from '@/components/PhaseWarningBanner';
+import { SpecCard } from '@/components/SpecCard';
+import { DataCard } from '@/components/DataCard';
+import { StepIndicator, type StepStatus } from '@/components/StepIndicator';
+import { loadProductData } from '@/lib/product-loader';
+import { loadSectionData } from '@/lib/section-loader';
+import { ChevronRight, Layout, Image, Download, ArrowRight, LayoutList } from 'lucide-react';
 
 /**
  * Determine the status of each step based on what data exists
  * Steps: 1. Section Overview (Spec), 2. Sample Data, 3. Screen Designs, 4. Screenshots
  */
 function getStepStatuses(sectionData: ReturnType<typeof loadSectionData> | null): StepStatus[] {
-  const hasSpec = !!sectionData?.specParsed
-  const hasData = !!sectionData?.data
-  const hasScreenDesigns = !!(sectionData?.screenDesigns && sectionData.screenDesigns.length > 0)
-  const hasScreenshots = !!(sectionData?.screenshots && sectionData.screenshots.length > 0)
+  const hasSpec = !!sectionData?.specParsed;
+  const hasData = !!sectionData?.data;
+  const hasScreenDesigns = !!(sectionData?.screenDesigns && sectionData.screenDesigns.length > 0);
+  const hasScreenshots = !!(sectionData?.screenshots && sectionData.screenshots.length > 0);
 
-  const steps: boolean[] = [hasSpec, hasData, hasScreenDesigns, hasScreenshots]
-  const firstIncomplete = steps.findIndex((done) => !done)
+  const steps: boolean[] = [hasSpec, hasData, hasScreenDesigns, hasScreenshots];
+  const firstIncomplete = steps.findIndex((done) => !done);
 
   return steps.map((done, index) => {
-    if (done) return 'completed'
-    if (index === firstIncomplete) return 'current'
-    return 'upcoming'
-  })
+    if (done) return 'completed';
+    if (index === firstIncomplete) return 'current';
+    return 'upcoming';
+  });
 }
 
 /**
@@ -36,47 +36,42 @@ function getStepStatuses(sectionData: ReturnType<typeof loadSectionData> | null)
  * Screenshots are optional and don't count toward completion
  */
 function areRequiredStepsComplete(sectionData: ReturnType<typeof loadSectionData> | null): boolean {
-  const hasSpec = !!sectionData?.specParsed
-  const hasData = !!sectionData?.data
-  const hasScreenDesigns = !!(sectionData?.screenDesigns && sectionData.screenDesigns.length > 0)
-  return hasSpec && hasData && hasScreenDesigns
+  const hasSpec = !!sectionData?.specParsed;
+  const hasData = !!sectionData?.data;
+  const hasScreenDesigns = !!(sectionData?.screenDesigns && sectionData.screenDesigns.length > 0);
+  return hasSpec && hasData && hasScreenDesigns;
 }
 
 export function SectionPage() {
-  const { sectionId } = useParams<{ sectionId: string }>()
-  const navigate = useNavigate()
+  const { sectionId } = useParams<{ sectionId: string }>();
+  const navigate = useNavigate();
 
   // Load product data to get section info
-  const productData = useMemo(() => loadProductData(), [])
-  const sections = productData.roadmap?.sections || []
-  const section = sections.find((s) => s.id === sectionId)
-  const currentIndex = sections.findIndex((s) => s.id === sectionId)
+  const productData = useMemo(() => loadProductData(), []);
+  const sections = productData.roadmap?.sections || [];
+  const section = sections.find((s) => s.id === sectionId);
+  const currentIndex = sections.findIndex((s) => s.id === sectionId);
 
   // Load section-specific data (spec, data.json, screen designs, screenshots)
-  const sectionData = useMemo(
-    () => (sectionId ? loadSectionData(sectionId) : null),
-    [sectionId]
-  )
+  const sectionData = useMemo(() => (sectionId ? loadSectionData(sectionId) : null), [sectionId]);
 
   // Handle missing section
   if (!section) {
     return (
       <AppLayout backTo="/sections" backLabel="Sections">
         <div className="text-center py-12">
-          <p className="text-stone-600 dark:text-stone-400">
-            Section not found: {sectionId}
-          </p>
+          <p className="text-stone-600 dark:text-stone-400">Section not found: {sectionId}</p>
         </div>
       </AppLayout>
-    )
+    );
   }
 
-  const stepStatuses = getStepStatuses(sectionData)
-  const requiredStepsComplete = areRequiredStepsComplete(sectionData)
+  const stepStatuses = getStepStatuses(sectionData);
+  const requiredStepsComplete = areRequiredStepsComplete(sectionData);
 
   // Next section navigation logic
-  const isLastSection = currentIndex === sections.length - 1 || currentIndex === -1
-  const nextSection = !isLastSection ? sections[currentIndex + 1] : null
+  const isLastSection = currentIndex === sections.length - 1 || currentIndex === -1;
+  const nextSection = !isLastSection ? sections[currentIndex + 1] : null;
 
   return (
     <AppLayout backTo="/sections" backLabel="Sections" title={section.title}>
@@ -86,9 +81,7 @@ export function SectionPage() {
           <h1 className="text-2xl font-semibold text-stone-900 dark:text-stone-100 mb-2">
             {section.title}
           </h1>
-          <p className="text-stone-600 dark:text-stone-400">
-            {section.description}
-          </p>
+          <p className="text-stone-600 dark:text-stone-400">{section.description}</p>
         </div>
 
         {/* Warning banner for incomplete prerequisite phases */}
@@ -128,13 +121,19 @@ export function SectionPage() {
                       >
                         <div className="flex items-center gap-3 min-w-0">
                           <div className="w-8 h-8 rounded-md bg-stone-200 dark:bg-stone-700 flex items-center justify-center shrink-0">
-                            <Layout className="w-4 h-4 text-stone-600 dark:text-stone-300" strokeWidth={1.5} />
+                            <Layout
+                              className="w-4 h-4 text-stone-600 dark:text-stone-300"
+                              strokeWidth={1.5}
+                            />
                           </div>
                           <span className="font-medium text-stone-900 dark:text-stone-100 truncate">
                             {screenDesign.name}
                           </span>
                         </div>
-                        <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500 shrink-0" strokeWidth={1.5} />
+                        <ChevronRight
+                          className="w-4 h-4 text-stone-400 dark:text-stone-500 shrink-0"
+                          strokeWidth={1.5}
+                        />
                       </Link>
                     </li>
                   ))}
@@ -151,7 +150,10 @@ export function SectionPage() {
               <CardContent className="py-8">
                 <div className="flex flex-col items-center text-center max-w-sm mx-auto">
                   <div className="w-10 h-10 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center mb-3">
-                    <Image className="w-5 h-5 text-stone-400 dark:text-stone-500" strokeWidth={1.5} />
+                    <Image
+                      className="w-5 h-5 text-stone-400 dark:text-stone-500"
+                      strokeWidth={1.5}
+                    />
                   </div>
                   <h3 className="text-base font-medium text-stone-600 dark:text-stone-400 mb-1">
                     No screenshots captured yet
@@ -227,7 +229,10 @@ export function SectionPage() {
                       <ArrowRight className="w-5 h-5" strokeWidth={1.5} />
                       <span className="font-medium">Continue to {nextSection.title}</span>
                     </div>
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                    <ArrowRight
+                      className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                      strokeWidth={1.5}
+                    />
                   </button>
                   <button
                     onClick={() => navigate('/sections')}
@@ -237,7 +242,10 @@ export function SectionPage() {
                       <LayoutList className="w-5 h-5" strokeWidth={1.5} />
                       <span className="font-medium">View All Sections</span>
                     </div>
-                    <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                    <ChevronRight
+                      className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                      strokeWidth={1.5}
+                    />
                   </button>
                 </>
               ) : (
@@ -250,7 +258,10 @@ export function SectionPage() {
                     <LayoutList className="w-5 h-5" strokeWidth={1.5} />
                     <span className="font-medium">Back to All Sections</span>
                   </div>
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                  <ArrowRight
+                    className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                    strokeWidth={1.5}
+                  />
                 </button>
               )}
             </div>
@@ -258,5 +269,5 @@ export function SectionPage() {
         )}
       </div>
     </AppLayout>
-  )
+  );
 }

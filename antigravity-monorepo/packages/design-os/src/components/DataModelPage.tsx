@@ -1,17 +1,17 @@
-import { useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AppLayout } from '@/components/AppLayout'
-import { EmptyState } from '@/components/EmptyState'
-import { StepIndicator, type StepStatus } from '@/components/StepIndicator'
-import { NextPhaseButton } from '@/components/NextPhaseButton'
-import { loadProductData } from '@/lib/product-loader'
+import { useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AppLayout } from '@/components/AppLayout';
+import { EmptyState } from '@/components/EmptyState';
+import { StepIndicator, type StepStatus } from '@/components/StepIndicator';
+import { NextPhaseButton } from '@/components/NextPhaseButton';
+import { loadProductData } from '@/lib/product-loader';
 
 export function DataModelPage() {
-  const productData = useMemo(() => loadProductData(), [])
-  const dataModel = productData.dataModel
+  const productData = useMemo(() => loadProductData(), []);
+  const dataModel = productData.dataModel;
 
-  const hasDataModel = !!dataModel
-  const stepStatus: StepStatus = hasDataModel ? 'completed' : 'current'
+  const hasDataModel = !!dataModel;
+  const stepStatus: StepStatus = hasDataModel ? 'completed' : 'current';
 
   return (
     <AppLayout>
@@ -83,9 +83,7 @@ export function DataModelPage() {
                       {dataModel.relationships.map((relationship, index) => (
                         <li key={index} className="flex items-start gap-3">
                           <span className="w-1.5 h-1.5 rounded-full bg-stone-400 dark:bg-stone-500 mt-2 shrink-0" />
-                          <span className="text-stone-700 dark:text-stone-300">
-                            {relationship}
-                          </span>
+                          <span className="text-stone-700 dark:text-stone-300">{relationship}</span>
                         </li>
                       ))}
                     </ul>
@@ -116,5 +114,5 @@ export function DataModelPage() {
         )}
       </div>
     </AppLayout>
-  )
+  );
 }

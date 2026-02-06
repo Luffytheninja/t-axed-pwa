@@ -5,6 +5,7 @@
 I've successfully implemented a **dual-theme system** for Life OS that allows seamless switching between two distinct personalities:
 
 ### 🏛️ Classic Mode
+
 - Soft, rounded aesthetics
 - Original color palette (Red/Blue)
 - "Body" and "Work" terminology
@@ -12,6 +13,7 @@ I've successfully implemented a **dual-theme system** for Life OS that allows se
 - Gentle modifiers
 
 ### ⚔️ Suave Spartan Mode (Naija Tech Bro Edition)
+
 - **Sharp, angular design** (NO rounded corners)
 - **Glass card effect** with backdrop blur
 - **Nigerian color palette**:
@@ -32,11 +34,13 @@ I've successfully implemented a **dual-theme system** for Life OS that allows se
 ## Features Implemented
 
 ### ✅ Theme Engine
+
 - Dynamic CSS variable switching
 - Theme persistence (localStorage)
 - Real-time theme toggling (no reload needed)
 
 ### ✅ Enhanced XP System
+
 - **Theme-aware calculations**
 - **Boss Battle** quest type:
   - 3x base XP multiplier
@@ -48,6 +52,7 @@ I've successfully implemented a **dual-theme system** for Life OS that allows se
   - Visible streak badge
 
 ### ✅ Visual Enhancements
+
 - **Liquid Pillar animation** (Suave Spartan):
   - Vertical progress bars
   - Wave effect on fill edge
@@ -60,21 +65,25 @@ I've successfully implemented a **dual-theme system** for Life OS that allows se
 ### ✅ Theme-Specific Modifiers
 
 **Classic Sleep System:**
+
 - < 6h: 0.7x
 - 6-7h: 0.85x
 - 7-8h: 1.0x
 - 8+h: 1.15x
 
 **Suave Spartan Sleep System:**
+
 - < 6h: 0.5x (BRUTAL)
 - 6-7h: 0.75x
 - 7-8.5h: 1.0x
 - 8.5+h: 1.25x (Elite)
 
 **Classic Fatigue:**
+
 - Linear: 1.0 - (fatigue /200)
 
 **Suave Spartan Fatigue:**
+
 - 0-30: 1.0x (Fresh)
 - 31-50: 0.9x (Grinding)
 - 51-70: 0.75x (Fatigued)
@@ -85,20 +94,21 @@ I've successfully implemented a **dual-theme system** for Life OS that allows se
 ### Switching Themes
 
 **Option 1: Console Command**
+
 ```javascript
-app.switchTheme()
+app.switchTheme();
 ```
 
 **Option 2: Theme Toggle Button** (Coming soon - just add the button to UI)
+
 ```html
-<button class="theme-toggle" onclick="app.switchTheme()">
-  Switch Theme
-</button>
+<button class="theme-toggle" onclick="app.switchTheme()">Switch Theme</button>
 ```
 
 ### Logging a Boss Battle
 
 In Suave Spartan mode, Boss Battle quests appear as special options:
+
 - **Gym**: Boss Battle (+100 base → 300 XP after multipliers!)
 - **Work**: Client Pitch (+80 base → 240 XP)
 
@@ -107,6 +117,7 @@ They're marked with a gold border and "⚡ BOSS BATTLE" badge.
 ### Streak System
 
 The streak automatically tracks when you log gym quests:
+
 - **Day 1**: Streak = 1
 - **Day 2 (consecutive)**: Streak = 2
 - **Day 5+**: You get the 1.3x streak bonus!
@@ -130,18 +141,19 @@ life-os/
 ## What's Next
 
 ### Immediate TODOs:
+
 1. **Update UI.js** to:
    - Show Boss Battle quest options (only in Suave Spartan mode)
    - Display streak badge when >= 5 sessions
    - Use theme-specific copy (Lock In / Ship It)
    - Add theme toggle button to header
-   
 2. **Test the theme switch**:
    - Open browser console
    - Run `app.switchTheme()`
    - Watch the UI transform
 
 ### Future Enhancements:
+
 - **Midnight auto-reset** (fatigue recovery, streak check)
 - **Push notifications** for streak milestones
 - **Leaderboards** (competitive Naija tech bro energy)
@@ -152,17 +164,17 @@ life-os/
 
 ```javascript
 // Toggle theme
-app.switchTheme()
+app.switchTheme();
 
 // Check current theme
-app.themeManager.getTheme().id  // "classic" or "suaveSpartan"
+app.themeManager.getTheme().id; // "classic" or "suaveSpartan"
 
 // View streak
-app.profile.current_streak
-app.profile.longest_streak
+app.profile.current_streak;
+app.profile.longest_streak;
 
 // Force a Boss Battle XP calculation
-app.xpEngine.previewXP('boss', 'gym', app.todayLog, app.weekLogs, app.profile)
+app.xpEngine.previewXP('boss', 'gym', app.todayLog, app.weekLogs, app.profile);
 ```
 
 ## Known Limitations
@@ -174,6 +186,7 @@ app.xpEngine.previewXP('boss', 'gym', app.todayLog, app.weekLogs, app.profile)
 ## Technical Notes
 
 ### Theme Detection in Code
+
 ```javascript
 const theme = app.themeManager.getTheme();
 
@@ -185,11 +198,14 @@ if (theme.id === 'suaveSpartan') {
 ```
 
 ### CSS Theme Classes
+
 The `<body>` gets a class based on theme:
+
 - `theme-classic`
 - `theme-suaveSpartan`
 
 Use this for theme-specific styling:
+
 ```css
 .theme-suaveSpartan .card {
   border-radius: 0 !important;
@@ -202,4 +218,3 @@ Use this for theme-specific styling:
 **Status**: Core theme system complete. UI integration in progress.
 
 **Vibe Check**: The Suave Spartan mode is AGGRESSIVE. Nigerian tech bro approved. 💪🇳🇬
-

@@ -1,12 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom'
-import { ProductPage } from '@/components/ProductPage'
-import { DataModelPage } from '@/components/DataModelPage'
-import { DesignPage } from '@/components/DesignPage'
-import { SectionsPage } from '@/components/SectionsPage'
-import { SectionPage } from '@/components/SectionPage'
-import { ScreenDesignPage, ScreenDesignFullscreen } from '@/components/ScreenDesignPage'
-import { ShellDesignPage, ShellDesignFullscreen } from '@/components/ShellDesignPage'
-import { ExportPage } from '@/components/ExportPage'
+import { createBrowserRouter } from 'react-router-dom';
+import { ProductPage } from '@/components/ProductPage';
+import { DataModelPage } from '@/components/DataModelPage';
+import { DesignPage } from '@/components/DesignPage';
+import { SectionsPage } from '@/components/SectionsPage';
+import { SectionPage } from '@/components/SectionPage';
+import { ScreenDesignPage, ScreenDesignFullscreen } from '@/components/ScreenDesignPage';
+import { ShellDesignPage, ShellDesignFullscreen } from '@/components/ShellDesignPage';
+import { ExportPage } from '@/components/ExportPage';
 
 export const router = createBrowserRouter([
   {
@@ -49,4 +49,4 @@ export const router = createBrowserRouter([
     path: '/export',
     element: <ExportPage />,
   },
-])
+]);

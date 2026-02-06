@@ -1,89 +1,95 @@
-import * as React from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label?: string
-    description?: string
-    error?: string
-    isLoading?: boolean
-    leftElement?: React.ReactNode
-    rightElement?: React.ReactNode
+  label?: string;
+  description?: string;
+  error?: string;
+  isLoading?: boolean;
+  leftElement?: React.ReactNode;
+  rightElement?: React.ReactNode;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ label, description, error, isLoading, leftElement, rightElement, className, ...props }, ref) => {
-        const [isFocused, setIsFocused] = React.useState(false)
+  (
+    { label, description, error, isLoading, leftElement, rightElement, className, ...props },
+    ref,
+  ) => {
+    const [isFocused, setIsFocused] = React.useState(false);
 
-        return (
-            <div className="w-full space-y-1.5 group">
-                {label && (
-                    <label className="block text-[10px] font-bold uppercase tracking-[0.15em] text-foreground/50 group-focus-within:text-accent transition-colors">
-                        {label}
-                    </label>
-                )}
+    return (
+      <div className="w-full space-y-2 group">
+        {label && (
+          <label className="block text-overline font-semibold text-navy/60 group-focus-within:text-primary transition-colors">
+            {label}
+          </label>
+        )}
 
-                <div className="relative">
-                    <div
-                        className={cn(
-                            "flex items-center rounded-2xl border-2 transition-all duration-300 px-4",
-                            isFocused
-                                ? "border-accent bg-white shadow-sm"
-                                : "border-black/5 bg-muted/30 hover:border-black/10",
-                            error && "border-accent shadow-accent/10"
-                        )}
-                    >
-                        {leftElement && (
-                            <div className="mr-3 text-foreground/40 transition-colors group-focus-within:text-accent">
-                                {leftElement}
-                            </div>
-                        )}
+        <div className="relative">
+          <motion.div
+            animate={isFocused ? { scale: 1.005 } : { scale: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className={cn(
+              'flex items-center rounded-md border-2 transition-all px-4 bg-surface-bg',
+              isFocused
+                ? 'border-primary shadow-sm ring-4 ring-primary/5'
+                : 'border-border-default hover:border-border-strong',
+              error && 'border-error ring-error/10',
+              className,
+            )}
+          >
+            {leftElement && (
+              <div className="mr-3 text-navy/40 transition-colors group-focus-within:text-primary">
+                {leftElement}
+              </div>
+            )}
 
-                        <input
-                            ref={ref}
-                            className={cn(
-                                "flex-1 bg-transparent py-3.5 text-sm font-medium focus:outline-none placeholder:text-foreground/20",
-                                className
-                            )}
-                            onFocus={() => setIsFocused(true)}
-                            onBlur={() => setIsFocused(false)}
-                            {...props}
-                        />
+            <input
+              ref={ref}
+              className={cn(
+                'flex-1 bg-transparent py-4 text-body font-medium focus:outline-none placeholder:text-neutral-400',
+              )}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              {...props}
+            />
 
-                        {isLoading ? (
-                            <div className="ml-3 h-4 w-4 animate-spin rounded-full border-2 border-accent/20 border-t-accent" />
-                        ) : rightElement ? (
-                            <div className="ml-3 text-foreground/40 transition-colors group-focus-within:text-accent">
-                                {rightElement}
-                            </div>
-                        ) : null}
-                    </div>
-                </div>
+            {isLoading ? (
+              <div className="ml-3 h-5 w-5 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+            ) : rightElement ? (
+              <div className="ml-3 text-navy/40 transition-colors group-focus-within:text-primary">
+                {rightElement}
+              </div>
+            ) : null}
+          </motion.div>
+        </div>
 
-                <AnimatePresence mode="wait">
-                    {error ? (
-                        <motion.p
-                            key="error"
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="text-[11px] font-bold text-accent"
-                        >
-                            {error}
-                        </motion.p>
-                    ) : description ? (
-                        <p className="text-[11px] text-foreground/40">{description}</p>
-                    ) : null}
-                </AnimatePresence>
-            </div>
-        )
-    }
-)
-Input.displayName = "Input"
+        <AnimatePresence mode="wait">
+          {error ? (
+            <motion.p
+              key="error"
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              className="text-caption font-semibold text-error pl-1"
+            >
+              {error}
+            </motion.p>
+          ) : description ? (
+            <p className="text-caption text-navy/40 pl-1">{description}</p>
+          ) : null}
+        </AnimatePresence>
+      </div>
+    );
+  },
+);
 
-export { Input }
+Input.displayName = 'Input';
+
+export { Input };

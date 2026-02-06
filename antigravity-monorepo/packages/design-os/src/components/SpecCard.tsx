@@ -1,22 +1,22 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { ChevronDown, PanelTop, Square } from 'lucide-react'
-import { EmptyState } from '@/components/EmptyState'
-import type { ParsedSpec } from '@/types/section'
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ChevronDown, PanelTop, Square } from 'lucide-react';
+import { EmptyState } from '@/components/EmptyState';
+import type { ParsedSpec } from '@/types/section';
 
 interface SpecCardProps {
-  spec: ParsedSpec | null
-  sectionTitle?: string
+  spec: ParsedSpec | null;
+  sectionTitle?: string;
 }
 
 export function SpecCard({ spec, sectionTitle }: SpecCardProps) {
-  const [userFlowsOpen, setUserFlowsOpen] = useState(false)
-  const [uiReqOpen, setUiReqOpen] = useState(false)
+  const [userFlowsOpen, setUserFlowsOpen] = useState(false);
+  const [uiReqOpen, setUiReqOpen] = useState(false);
 
   // Empty state
   if (!spec) {
-    return <EmptyState type="spec" />
+    return <EmptyState type="spec" />;
   }
 
   return (
@@ -29,9 +29,7 @@ export function SpecCard({ spec, sectionTitle }: SpecCardProps) {
       <CardContent className="space-y-4">
         {/* Overview */}
         {spec.overview && (
-          <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
-            {spec.overview}
-          </p>
+          <p className="text-stone-600 dark:text-stone-400 leading-relaxed">{spec.overview}</p>
         )}
 
         {/* User Flows - Expandable */}
@@ -56,9 +54,7 @@ export function SpecCard({ spec, sectionTitle }: SpecCardProps) {
                 {spec.userFlows.map((flow, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-stone-100 mt-2 shrink-0" />
-                    <span className="text-stone-700 dark:text-stone-300 text-sm">
-                      {flow}
-                    </span>
+                    <span className="text-stone-700 dark:text-stone-300 text-sm">{flow}</span>
                   </li>
                 ))}
               </ul>
@@ -88,9 +84,7 @@ export function SpecCard({ spec, sectionTitle }: SpecCardProps) {
                 {spec.uiRequirements.map((req, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-stone-100 mt-2 shrink-0" />
-                    <span className="text-stone-700 dark:text-stone-300 text-sm">
-                      {req}
-                    </span>
+                    <span className="text-stone-700 dark:text-stone-300 text-sm">{req}</span>
                   </li>
                 ))}
               </ul>
@@ -118,5 +112,5 @@ export function SpecCard({ spec, sectionTitle }: SpecCardProps) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

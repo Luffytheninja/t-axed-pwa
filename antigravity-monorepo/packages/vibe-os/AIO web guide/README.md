@@ -11,6 +11,7 @@
 This isn't just a portfolio—it's a **statement about how you work**. By treating the browser as an operating system, you've created a space where design work, "lazy" automations, and bass guitar passion coexist in one cohesive, beautiful environment.
 
 **The Vibecoder Ethos:**
+
 - **Lazy Efficiency**: Update content via CMS, never touch code
 - **Technical Depth**: WebGL, Web Audio API, advanced React patterns
 - **Aesthetic Precision**: Every color, font, and spacing is deliberate
@@ -22,6 +23,7 @@ This isn't just a portfolio—it's a **statement about how you work**. By treati
 ## 🎨 The Aesthetic
 
 ### Muted Crayola Palette
+
 ```
 Manila    #F3E5AB  →  Background (like old paper)
 Cadet     #5B92E5  →  Primary blue (headers, icons)
@@ -31,10 +33,12 @@ Charcoal  #36454F  →  Text and borders
 ```
 
 ### Typography
+
 - **JetBrains Mono** - All UI, technical text, code
 - **EB Garamond** - Long-form reading in rants
 
 ### Visual Texture
+
 - **Grain Shader** - Subtle film grain (5% opacity)
 - **Paper Feel** - Manila backgrounds with charcoal borders
 - **Spring Animations** - Everything bounces slightly on interaction
@@ -44,6 +48,7 @@ Charcoal  #36454F  →  Text and borders
 ## 🏗️ Architecture
 
 ### Tech Stack
+
 ```
 Next.js 14      →  App Router, TypeScript
 Framer Motion   →  Drag, animations, springs
@@ -56,17 +61,20 @@ Zustand         →  Window state management
 ### System Components
 
 **Desktop Environment**
+
 - Draggable, focusable windows with minimize/maximize/close
 - Desktop icons (folders and files)
 - System taskbar with clock and status indicators
 - Grain texture overlay
 
 **The Three Engines**
+
 1. **PDF Gallery** - Print-style project portfolios with snap scroll
 2. **Terminal** - Auto-typed process logs showing your vibecoding
 3. **Signal Reader** - Editorial-style rants with sidenotes
 
 **Special Features**
+
 - **Bass Visualizer** - WebGL strings that vibrate to low frequencies
 - **Toast Notifications** - Positive reinforcement for interactions
 - **Sound System** - Mechanical clicks and whoosh effects
@@ -155,6 +163,7 @@ vibe-os/
 ## 🎮 Features Overview
 
 ### Core Desktop Experience
+
 - ✅ Draggable windows constrained to viewport
 - ✅ Click-to-focus with z-index management
 - ✅ Minimize/maximize/close buttons
@@ -166,6 +175,7 @@ vibe-os/
 ### Content Windows
 
 **PDF Gallery (Projects)**
+
 - Snap scroll between pages
 - Page counter (01 / 04)
 - Full-bleed images with captions
@@ -173,6 +183,7 @@ vibe-os/
 - Print-style A4 layout
 
 **Terminal (Process)**
+
 - Auto-typing animation
 - ASCII art headers
 - Syntax highlighted prompts vs code
@@ -180,18 +191,21 @@ vibe-os/
 - Dark charcoal + sage green aesthetic
 
 **Signal Reader (Rants)**
+
 - EB Garamond body text
 - Sidenotes in right margin
 - "Vibe Check" header with mood + track
 - Single-column editorial layout
 
 ### Bass Visualizer
+
 - 4 horizontal strings (E-A-D-G)
 - Vibrates based on low frequencies (20-250Hz)
 - Boss pedal aesthetic
 - Draggable volume/tone knobs
 
 ### Easter Eggs
+
 - **Konami Code**: ↑↑↓↓←→←→BA - Swaps to cyberpunk theme
 - **Terminal Commands**: Type `help` for hidden commands
 - **Pluckable String**: Hover footer 3s to play E1 note
@@ -213,31 +227,37 @@ Want to understand the "why" behind the design decisions?
 Need step-by-step instructions to build each part?
 
 ### Part 1: Foundation (30 min)
+
 **What you'll build:** Color palette, fonts, Zustand store, grain shader, taskbar
 
 [→ Read Part 1: Foundation Guide](./implementation/PART-1-FOUNDATION.md)
 
 ### Part 2: Windows & Desktop (45 min)
+
 **What you'll build:** Draggable windows, desktop icons, sounds, tooltips, content renderer
 
 [→ Read Part 2: Windows & Desktop Guide](./implementation/PART-2-WINDOWS.md)
 
 ### Part 3: Content Renderers (60 min)
+
 **What you'll build:** PDF viewer, Terminal view, Signal reader
 
 [→ Read Part 3: Content Renderers Guide](./implementation/PART-3-CONTENT.md)
 
 ### Part 4: Special Features (45 min)
+
 **What you'll build:** Bass visualizer, toast system, README view
 
 [→ Read Part 4: Special Features Guide](./implementation/PART-4-FEATURES.md)
 
 ### Part 5: CMS Integration (30 min)
+
 **What you'll build:** Sanity schemas, GROQ queries, data fetching
 
 [→ Read Part 5: CMS Integration Guide](./implementation/PART-5-CMS.md)
 
 ### Part 6: Polish & Deploy (30 min)
+
 **What you'll build:** Boot sequence, easter eggs, SEO, Vercel deployment
 
 [→ Read Part 6: Polish & Deploy Guide](./implementation/PART-6-POLISH.md)
@@ -247,6 +267,7 @@ Need step-by-step instructions to build each part?
 ## 📊 Implementation Checklist
 
 ### Phase 1: Foundation (Complete Part 1)
+
 - [ ] Initialize Next.js 14 + TypeScript
 - [ ] Configure Tailwind with Crayola palette
 - [ ] Add Google Fonts (JetBrains Mono + EB Garamond)
@@ -255,6 +276,7 @@ Need step-by-step instructions to build each part?
 - [ ] Add grain shader overlay
 
 ### Phase 2: Windows & Desktop (Complete Part 2)
+
 - [ ] Build DraggableWindow component with Framer Motion
 - [ ] Create DesktopIcon component
 - [ ] Implement sound system (Web Audio API)
@@ -262,23 +284,27 @@ Need step-by-step instructions to build each part?
 - [ ] Build ContentRenderer switch
 
 ### Phase 3: Content Renderers (Complete Part 3)
+
 - [ ] Build PDFViewer with snap scroll
 - [ ] Create TerminalView with auto-typing
 - [ ] Build SignalReader with sidenotes
 - [ ] Add ReadmeView component
 
 ### Phase 4: Special Features (Complete Part 4)
+
 - [ ] Build BassVisualizer with React Three Fiber
 - [ ] Create Toast notification system
 - [ ] Add system status indicators
 
 ### Phase 5: CMS Integration (Complete Part 5)
+
 - [ ] Set up Sanity project
 - [ ] Define schemas (project, rant, settings)
 - [ ] Create GROQ queries
 - [ ] Connect to Next.js
 
 ### Phase 6: Polish (Complete Part 6)
+
 - [ ] Add boot sequence
 - [ ] Implement Konami code
 - [ ] Add terminal commands
@@ -291,29 +317,35 @@ Need step-by-step instructions to build each part?
 ## 🎯 Usage Scenarios
 
 ### Scenario 1: Quick Reference
+
 > "I forgot how the color palette works"
 
 **Solution:** Check this README's "Aesthetic" section for quick color codes.
 
 ### Scenario 2: Building From Scratch
+
 > "I want to build this entire portfolio from zero"
 
 **Solution:** Follow the [Implementation Guides](./implementation/) in order, Parts 1-6.
 
 ### Scenario 3: Adding a Feature
+
 > "I want to add a new window type for my photography"
 
 **Solution:**
+
 1. Read [Part 2](./implementation/PART-2-WINDOWS.md) to understand window system
 2. Read [Part 3](./implementation/PART-3-CONTENT.md) to see how content renderers work
 3. Create your PhotoGallery component following the same pattern
 
 ### Scenario 4: Understanding Design Decisions
+
 > "Why use this specific color palette?"
 
 **Solution:** Read the [Aesthetic System](./vision/AESTHETIC.md) philosophy document.
 
 ### Scenario 5: AI Code Generation
+
 > "I want Claude/Cursor/v0 to build a component for me"
 
 **Solution:** Copy the specific implementation guide section and paste it into your AI tool.

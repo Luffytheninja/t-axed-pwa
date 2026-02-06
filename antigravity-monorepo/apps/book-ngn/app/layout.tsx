@@ -1,26 +1,29 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google"; // Using Geist as "Inter-like" modern font
-import "./globals.css";
-import { BookkeepingProvider } from "@/components/providers/BookkeepingContext";
+import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google'; // Using Geist as "Inter-like" modern font
+import './globals.css';
+import { BookkeepingProvider } from '@/components/providers/BookkeepingContext';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
+export const viewport: Viewport = {
+  themeColor: '#0A0A0A',
+};
+
 export const metadata: Metadata = {
-  title: "BookNGN | Fiscal Clarity",
-  description: "Modern bookkeeping and tax automation for Nigerians.",
-  applicationName: "BookNGN",
+  title: 'BookNGN | Fiscal Clarity',
+  description: 'Modern bookkeeping and tax automation for Nigerians.',
+  applicationName: 'BookNGN',
   formatDetection: {
     telephone: false,
   },
-  themeColor: "#0A0A0A",
 };
 
 export default function RootLayout({
@@ -33,9 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
       >
-        <BookkeepingProvider>
-          {children}
-        </BookkeepingProvider>
+        <BookkeepingProvider>{children}</BookkeepingProvider>
       </body>
     </html>
   );

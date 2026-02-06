@@ -1,51 +1,48 @@
-import { useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { loadProductData } from '@/lib/product-loader'
-import { AppLayout } from '@/components/AppLayout'
-import { EmptyState } from '@/components/EmptyState'
-import { ProductOverviewCard } from '@/components/ProductOverviewCard'
-import { SectionsCard } from '@/components/SectionsCard'
-import { StepIndicator, type StepStatus } from '@/components/StepIndicator'
-import { NextPhaseButton } from '@/components/NextPhaseButton'
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { loadProductData } from '@/lib/product-loader';
+import { AppLayout } from '@/components/AppLayout';
+import { EmptyState } from '@/components/EmptyState';
+import { ProductOverviewCard } from '@/components/ProductOverviewCard';
+import { SectionsCard } from '@/components/SectionsCard';
+import { StepIndicator, type StepStatus } from '@/components/StepIndicator';
+import { NextPhaseButton } from '@/components/NextPhaseButton';
 
 /**
  * Determine the status of each step on the Product page
  * Steps: 1. Product Vision, 2. Roadmap
  */
-function getProductPageStepStatuses(
-  hasOverview: boolean,
-  hasRoadmap: boolean
-): StepStatus[] {
-  const statuses: StepStatus[] = []
+function getProductPageStepStatuses(hasOverview: boolean, hasRoadmap: boolean): StepStatus[] {
+  const statuses: StepStatus[] = [];
 
   // Step 1: Product Vision
   if (hasOverview) {
-    statuses.push('completed')
+    statuses.push('completed');
   } else {
-    statuses.push('current')
+    statuses.push('current');
   }
 
   // Step 2: Roadmap
   if (hasRoadmap) {
-    statuses.push('completed')
+    statuses.push('completed');
   } else if (hasOverview) {
-    statuses.push('current')
+    statuses.push('current');
   } else {
-    statuses.push('upcoming')
+    statuses.push('upcoming');
   }
 
-  return statuses
+  return statuses;
 }
 
 export function ProductPage() {
-  const navigate = useNavigate()
-  const productData = useMemo(() => loadProductData(), [])
+  const navigate = useNavigate();
+  const productData = useMemo(() => loadProductData(), []);
 
-  const hasOverview = !!productData.overview
-  const hasRoadmap = !!productData.roadmap
-  const allStepsComplete = hasOverview && hasRoadmap
+  const hasOverview = !!productData.overview;
+  const hasRoadmap = !!productData.roadmap;
+  const allStepsComplete = hasOverview && hasRoadmap;
 
-  const stepStatuses = getProductPageStepStatuses(hasOverview, hasRoadmap)
+  const stepStatuses = getProductPageStepStatuses(hasOverview, hasRoadmap);
 
   return (
     <AppLayout>
@@ -93,5 +90,5 @@ export function ProductPage() {
         )}
       </div>
     </AppLayout>
-  )
+  );
 }

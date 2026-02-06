@@ -1,20 +1,20 @@
-import type { ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Layers, ArrowLeft } from 'lucide-react'
-import { PhaseNav } from './PhaseNav'
-import { ThemeToggle } from './ThemeToggle'
-import { Button } from '@/components/ui/button'
+import type { ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Layers, ArrowLeft } from 'lucide-react';
+import { PhaseNav } from './PhaseNav';
+import { ThemeToggle } from './ThemeToggle';
+import { Button } from '@/components/ui/button';
 
 interface AppLayoutProps {
-  children: ReactNode
+  children: ReactNode;
   /** Optional title shown in the header (for sub-pages) */
-  title?: string
+  title?: string;
   /** Optional back navigation path */
-  backTo?: string
+  backTo?: string;
   /** Optional back label */
-  backLabel?: string
+  backLabel?: string;
   /** Whether to show the phase nav (default: true) */
-  showPhaseNav?: boolean
+  showPhaseNav?: boolean;
 }
 
 export function AppLayout({
@@ -24,10 +24,10 @@ export function AppLayout({
   backLabel = 'Back',
   showPhaseNav = true,
 }: AppLayoutProps) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Determine if this is a sub-page (has back navigation)
-  const isSubPage = !!backTo
+  const isSubPage = !!backTo;
 
   return (
     <div className="min-h-screen bg-background animate-fade-in flex flex-col">
@@ -62,9 +62,7 @@ export function AppLayout({
             /* Main page header with phase nav - full width */
             <div className="flex items-center justify-between gap-4">
               {/* Theme Toggle on left for balance */}
-              <div className="w-10 shrink-0">
-                {/* Empty spacer for balance */}
-              </div>
+              <div className="w-10 shrink-0">{/* Empty spacer for balance */}</div>
 
               {/* Phase Navigation - centered */}
               {showPhaseNav && (
@@ -83,9 +81,7 @@ export function AppLayout({
       </header>
 
       {/* Main content */}
-      <main className="flex-1 max-w-3xl mx-auto px-6 py-12 w-full">
-        {children}
-      </main>
+      <main className="flex-1 max-w-3xl mx-auto px-6 py-12 w-full">{children}</main>
 
       {/* Footer with logo */}
       <footer className="py-8 flex justify-center">
@@ -103,5 +99,5 @@ export function AppLayout({
         </a>
       </footer>
     </div>
-  )
+  );
 }

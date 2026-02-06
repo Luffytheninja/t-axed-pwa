@@ -31,7 +31,8 @@ export default function Home() {
             Ready to make a difference in a mother's life?
           </h2>
           <p className="text-lg text-foreground/70 mb-12 max-w-xl mx-auto">
-            Your support directly funds maternal care, health education, and emergency services for women who need it most.
+            Your support directly funds maternal care, health education, and emergency services for
+            women who need it most.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <Button variant="primary" size="lg">

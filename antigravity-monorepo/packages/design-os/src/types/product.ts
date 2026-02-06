@@ -7,15 +7,15 @@
 // =============================================================================
 
 export interface Problem {
-  title: string
-  solution: string
+  title: string;
+  solution: string;
 }
 
 export interface ProductOverview {
-  name: string
-  description: string
-  problems: Problem[]
-  features: string[]
+  name: string;
+  description: string;
+  problems: Problem[];
+  features: string[];
 }
 
 // =============================================================================
@@ -23,14 +23,14 @@ export interface ProductOverview {
 // =============================================================================
 
 export interface Section {
-  id: string // slug derived from title
-  title: string
-  description: string
-  order: number
+  id: string; // slug derived from title
+  title: string;
+  description: string;
+  order: number;
 }
 
 export interface ProductRoadmap {
-  sections: Section[]
+  sections: Section[];
 }
 
 // =============================================================================
@@ -38,13 +38,13 @@ export interface ProductRoadmap {
 // =============================================================================
 
 export interface Entity {
-  name: string
-  description: string
+  name: string;
+  description: string;
 }
 
 export interface DataModel {
-  entities: Entity[]
-  relationships: string[]
+  entities: Entity[];
+  relationships: string[];
 }
 
 // =============================================================================
@@ -52,20 +52,20 @@ export interface DataModel {
 // =============================================================================
 
 export interface ColorTokens {
-  primary: string
-  secondary: string
-  neutral: string
+  primary: string;
+  secondary: string;
+  neutral: string;
 }
 
 export interface TypographyTokens {
-  heading: string
-  body: string
-  mono: string
+  heading: string;
+  body: string;
+  mono: string;
 }
 
 export interface DesignSystem {
-  colors: ColorTokens | null
-  typography: TypographyTokens | null
+  colors: ColorTokens | null;
+  typography: TypographyTokens | null;
 }
 
 // =============================================================================
@@ -73,15 +73,15 @@ export interface DesignSystem {
 // =============================================================================
 
 export interface ShellSpec {
-  raw: string
-  overview: string
-  navigationItems: string[]
-  layoutPattern: string
+  raw: string;
+  overview: string;
+  navigationItems: string[];
+  layoutPattern: string;
 }
 
 export interface ShellInfo {
-  spec: ShellSpec | null
-  hasComponents: boolean
+  spec: ShellSpec | null;
+  hasComponents: boolean;
 }
 
 // =============================================================================
@@ -89,9 +89,9 @@ export interface ShellInfo {
 // =============================================================================
 
 export interface ProductData {
-  overview: ProductOverview | null
-  roadmap: ProductRoadmap | null
-  dataModel: DataModel | null
-  designSystem: DesignSystem | null
-  shell: ShellInfo | null
+  overview: ProductOverview | null;
+  roadmap: ProductRoadmap | null;
+  dataModel: DataModel | null;
+  designSystem: DesignSystem | null;
+  shell: ShellInfo | null;
 }

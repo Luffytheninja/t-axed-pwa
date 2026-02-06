@@ -31,6 +31,7 @@ Stop here if any file is missing.
 Check for optional enhancements:
 
 **Design Tokens:**
+
 - Check if `/product/design-system/colors.json` exists
 - Check if `/product/design-system/typography.json` exists
 
@@ -39,6 +40,7 @@ If design tokens exist, read them and use them for styling. If they don't exist,
 "Note: Design tokens haven't been defined yet. I'll use default styling, but for consistent branding, consider running `/design-tokens` first."
 
 **Shell:**
+
 - Check if `src/shell/components/AppShell.tsx` exists
 
 If shell exists, the screen design will render inside the shell in Design OS. If not, show a warning:
@@ -94,15 +96,9 @@ The component MUST:
 Example:
 
 ```tsx
-import type { InvoiceListProps } from '@/../product/sections/[section-id]/types'
+import type { InvoiceListProps } from '@/../product/sections/[section-id]/types';
 
-export function InvoiceList({
-  invoices,
-  onView,
-  onEdit,
-  onDelete,
-  onCreate
-}: InvoiceListProps) {
+export function InvoiceList({ invoices, onView, onEdit, onDelete, onCreate }: InvoiceListProps) {
   return (
     <div className="max-w-4xl mx-auto">
       {/* Component content here */}
@@ -111,7 +107,7 @@ export function InvoiceList({
       <button onClick={onCreate}>Create Invoice</button>
 
       {/* Example: Mapping data with callbacks */}
-      {invoices.map(invoice => (
+      {invoices.map((invoice) => (
         <div key={invoice.id}>
           <span>{invoice.clientName}</span>
           <button onClick={() => onView?.(invoice.id)}>View</button>
@@ -120,7 +116,7 @@ export function InvoiceList({
         </div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -134,16 +130,19 @@ export function InvoiceList({
 ### Applying Design Tokens
 
 **If `/product/design-system/colors.json` exists:**
+
 - Use the primary color for buttons, links, and key accents
 - Use the secondary color for tags, highlights, secondary elements
 - Use the neutral color for backgrounds, text, and borders
 - Example: If primary is `lime`, use `lime-500`, `lime-600`, etc. for primary actions
 
 **If `/product/design-system/typography.json` exists:**
+
 - Note the font choices for reference in comments
 - The fonts will be applied at the app level, but use appropriate font weights
 
 **If design tokens don't exist:**
+
 - Fall back to `stone` for neutrals and `lime` for accents (Design OS defaults)
 
 ### What to Include
@@ -170,13 +169,13 @@ Create sub-components at `src/sections/[section-id]/components/[SubComponent].ts
 Example:
 
 ```tsx
-import type { Invoice } from '@/../product/sections/[section-id]/types'
+import type { Invoice } from '@/../product/sections/[section-id]/types';
 
 interface InvoiceRowProps {
-  invoice: Invoice
-  onView?: () => void
-  onEdit?: () => void
-  onDelete?: () => void
+  invoice: Invoice;
+  onView?: () => void;
+  onEdit?: () => void;
+  onDelete?: () => void;
 }
 
 export function InvoiceRow({ invoice, onView, onEdit, onDelete }: InvoiceRowProps) {
@@ -192,19 +191,19 @@ export function InvoiceRow({ invoice, onView, onEdit, onDelete }: InvoiceRowProp
         <button onClick={onDelete}>Delete</button>
       </div>
     </div>
-  )
+  );
 }
 ```
 
 Then import and use in the main component:
 
 ```tsx
-import { InvoiceRow } from './InvoiceRow'
+import { InvoiceRow } from './InvoiceRow';
 
 export function InvoiceList({ invoices, onView, onEdit, onDelete }: InvoiceListProps) {
   return (
     <div>
-      {invoices.map(invoice => (
+      {invoices.map((invoice) => (
         <InvoiceRow
           key={invoice.id}
           invoice={invoice}
@@ -214,7 +213,7 @@ export function InvoiceList({ invoices, onView, onEdit, onDelete }: InvoiceListP
         />
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -227,8 +226,8 @@ This wrapper is what Design OS renders. It imports the sample data and feeds it 
 Example:
 
 ```tsx
-import data from '@/../product/sections/[section-id]/data.json'
-import { InvoiceList } from './components/InvoiceList'
+import data from '@/../product/sections/[section-id]/data.json';
+import { InvoiceList } from './components/InvoiceList';
 
 export default function InvoiceListPreview() {
   return (
@@ -239,7 +238,7 @@ export default function InvoiceListPreview() {
       onDelete={(id) => console.log('Delete invoice:', id)}
       onCreate={() => console.log('Create new invoice')}
     />
-  )
+  );
 }
 ```
 
@@ -259,8 +258,8 @@ Create an index file at `src/sections/[section-id]/components/index.ts` to clean
 Example:
 
 ```tsx
-export { InvoiceList } from './InvoiceList'
-export { InvoiceRow } from './InvoiceRow'
+export { InvoiceList } from './InvoiceList';
+export { InvoiceRow } from './InvoiceRow';
 // Add other sub-components as needed
 ```
 

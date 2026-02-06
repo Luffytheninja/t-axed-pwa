@@ -1,53 +1,53 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { ChevronDown } from 'lucide-react'
-import { EmptyState } from '@/components/EmptyState'
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ChevronDown } from 'lucide-react';
+import { EmptyState } from '@/components/EmptyState';
 
 interface DataMeta {
-  models: Record<string, string>
-  relationships: string[]
+  models: Record<string, string>;
+  relationships: string[];
 }
 
 interface DataCardProps {
-  data: Record<string, unknown> | null
+  data: Record<string, unknown> | null;
 }
 
 function extractMeta(data: Record<string, unknown>): DataMeta | null {
-  const meta = data._meta as DataMeta | undefined
+  const meta = data._meta as DataMeta | undefined;
   if (meta && typeof meta === 'object' && meta.models && meta.relationships) {
-    return meta
+    return meta;
   }
-  return null
+  return null;
 }
 
 function getDataWithoutMeta(data: Record<string, unknown>): Record<string, unknown> {
-  const { _meta, ...rest } = data
-  return rest
+  const { _meta, ...rest } = data;
+  return rest;
 }
 
 function countRecords(data: Record<string, unknown>): number {
   // Count arrays at the top level as record collections (excluding _meta)
-  let count = 0
+  let count = 0;
   for (const [key, value] of Object.entries(data)) {
     if (key !== '_meta' && Array.isArray(value)) {
-      count += value.length
+      count += value.length;
     }
   }
-  return count
+  return count;
 }
 
 export function DataCard({ data }: DataCardProps) {
-  const [isJsonOpen, setIsJsonOpen] = useState(false)
+  const [isJsonOpen, setIsJsonOpen] = useState(false);
 
   // Empty state
   if (!data) {
-    return <EmptyState type="data" />
+    return <EmptyState type="data" />;
   }
 
-  const meta = extractMeta(data)
-  const dataWithoutMeta = getDataWithoutMeta(data)
-  const recordCount = countRecords(data)
+  const meta = extractMeta(data);
+  const dataWithoutMeta = getDataWithoutMeta(data);
+  const recordCount = countRecords(data);
 
   return (
     <Card className="border-stone-200 dark:border-stone-700 shadow-sm">
@@ -74,10 +74,7 @@ export function DataCard({ data }: DataCardProps) {
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {Object.entries(meta.models).map(([modelName, description]) => (
-                  <div
-                    key={modelName}
-                    className="bg-stone-50 dark:bg-stone-800/50 rounded-lg p-4"
-                  >
+                  <div key={modelName} className="bg-stone-50 dark:bg-stone-800/50 rounded-lg p-4">
                     <h3 className="font-semibold text-stone-900 dark:text-stone-100 mb-1">
                       {modelName}
                     </h3>
@@ -134,5 +131,5 @@ export function DataCard({ data }: DataCardProps) {
         </Collapsible>
       </CardContent>
     </Card>
-  )
+  );
 }

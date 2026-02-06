@@ -1,6 +1,7 @@
 # Studio Ayo — Launch Checklist & Backend Guide
 
 ## ✅ What is Done
+
 - **Frontend**: Full editorial design with React + Framer Motion.
 - **Case Studies**: Tiered architecture for deep-dive and high-level work.
 - **Abstract Design**: Premium low-opacity background imagery.
@@ -13,6 +14,7 @@
 ## 🚀 Deployment Checklist (Supabase + Vercel)
 
 ### 1. Set Up Supabase
+
 - [ ] Go to [Supabase](https://supabase.com/) and create a new project.
 - [ ] In the **SQL Editor**, run this command to create the `leads` table:
   ```sql
@@ -28,6 +30,7 @@
 - [ ] Go to **Project Settings → API** and copy your `URL` and `anon public` key.
 
 ### 2. Deploy to Vercel
+
 - [ ] Push your code to GitHub (Private or Public).
 - [ ] Connect the repo to [Vercel](https://vercel.com/).
 - [ ] **Crucial**: Add these Environment Variables during setup:
@@ -48,6 +51,7 @@
 ---
 
 ## 💡 Note on Tokens & Resources
+
 Since I am an AI, I don't have a "token bank" I can show you, but we've built this incredibly efficiently. By using **React + Vite + Supabase**, you are using the most modern, lightweight, and scalable stack available in 2026. This setup is "free tier" friendly across the board.
 
 **You are ready to ship.**

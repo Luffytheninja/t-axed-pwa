@@ -128,20 +128,20 @@ life-os/
 
 ```javascript
 // Gym Quest
-base_xp = GYM_XP[quest_type]
-xp *= fuel_modifier       // 0.75x (low), 1.0x (medium), 1.15x (high)
-xp += protein_bonus       // +5 if checked
-xp *= sleep_multiplier    // 0.7x - 1.15x based on hours
-xp *= fatigue_modifier    // 1.0 - (fatigue / 200)
-final_xp = floor(xp)
+base_xp = GYM_XP[quest_type];
+xp *= fuel_modifier; // 0.75x (low), 1.0x (medium), 1.15x (high)
+xp += protein_bonus; // +5 if checked
+xp *= sleep_multiplier; // 0.7x - 1.15x based on hours
+xp *= fatigue_modifier; // 1.0 - (fatigue / 200)
+final_xp = floor(xp);
 
 // Work Quest
-base_xp = WORK_XP[quest_type]
-xp *= balance_gate        // 0.5x if no gym quest today
-xp *= balance_bonus       // 1.1x if body_xp >= 50 today
-xp *= sleep_multiplier
-xp *= fatigue_modifier
-final_xp = floor(xp)
+base_xp = WORK_XP[quest_type];
+xp *= balance_gate; // 0.5x if no gym quest today
+xp *= balance_bonus; // 1.1x if body_xp >= 50 today
+xp *= sleep_multiplier;
+xp *= fatigue_modifier;
+final_xp = floor(xp);
 ```
 
 ### Fatigue System
@@ -163,7 +163,7 @@ rest_day: -20
 ### Level Up Thresholds
 
 ```javascript
-XP_to_level = current_level * 100
+XP_to_level = current_level * 100;
 
 // Examples:
 // Level 1 → 2: 100 XP
@@ -176,10 +176,10 @@ XP_to_level = current_level * 100
 Open the browser console (F12) to access debug commands:
 
 ```javascript
-app.reset()                 // Reset all data
-app.profile                 // View user profile
-app.todayLog                // View today's log
-app.storage.exportData()    // Export data as JSON
+app.reset(); // Reset all data
+app.profile; // View user profile
+app.todayLog; // View today's log
+app.storage.exportData(); // Export data as JSON
 ```
 
 ## What's Next?
@@ -198,6 +198,7 @@ app.storage.exportData()    // Export data as JSON
 ## Data Persistence
 
 All data is saved to `localStorage` automatically:
+
 - On every quest completion
 - Before page unload
 - Manual save via `app.save()`
@@ -214,6 +215,7 @@ All data is saved to `localStorage` automatically:
 ## Credits
 
 Built with:
+
 - Vanilla JavaScript (no frameworks)
 - Google Fonts (Inter)
 - localStorage API

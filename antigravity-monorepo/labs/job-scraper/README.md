@@ -14,11 +14,13 @@ A web scraper that automatically collects design-related job openings from popul
 ## Setup
 
 1. **Install Dependencies**:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 2. **Run Initial Setup**:
+
    ```bash
    # Linux/Mac
    ./run.sh
@@ -30,16 +32,19 @@ A web scraper that automatically collects design-related job openings from popul
 ## Usage
 
 ### Manual Scraping
+
 ```bash
 python scraper.py
 ```
 
 ### Start Web Dashboard
+
 ```bash
 streamlit run app.py
 ```
 
 ### Background Scheduling
+
 ```bash
 python scheduler.py
 ```
@@ -65,6 +70,7 @@ nigeria-job-scraper/
 ## Configuration
 
 Edit `config.py` to customize:
+
 - Job search keywords
 - Scraping sites and URLs
 - Schedule times
@@ -73,6 +79,7 @@ Edit `config.py` to customize:
 ## Database Schema
 
 Jobs are stored in `jobs.db` with the following fields:
+
 - title, company, location, salary
 - description, apply_url, posted_date
 - source, scraped_at

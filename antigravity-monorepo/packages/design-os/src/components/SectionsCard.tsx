@@ -1,10 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ChevronRight } from 'lucide-react'
-import type { ProductRoadmap } from '@/types/product'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChevronRight } from 'lucide-react';
+import type { ProductRoadmap } from '@/types/product';
 
 interface SectionsCardProps {
-  roadmap: ProductRoadmap
-  onSectionClick: (sectionId: string) => void
+  roadmap: ProductRoadmap;
+  onSectionClick: (sectionId: string) => void;
 }
 
 export function SectionsCard({ roadmap, onSectionClick }: SectionsCardProps) {
@@ -36,12 +36,15 @@ export function SectionsCard({ roadmap, onSectionClick }: SectionsCardProps) {
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500 flex-shrink-0" strokeWidth={1.5} />
+                <ChevronRight
+                  className="w-4 h-4 text-stone-400 dark:text-stone-500 flex-shrink-0"
+                  strokeWidth={1.5}
+                />
               </button>
             </li>
           ))}
         </ul>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -21,6 +21,7 @@ Stop here if the spec doesn't exist.
 Check if `/product/data-model/data-model.md` exists.
 
 **If it exists:**
+
 - Read the file to understand the global entity definitions
 - Entity names in your sample data should match the global data model
 - Use the descriptions and relationships as a guide
@@ -132,18 +133,17 @@ Example structure:
       "invoiceNumber": "INV-2024-001",
       "clientName": "Acme Corp",
       "clientEmail": "billing@acme.com",
-      "total": 1500.00,
+      "total": 1500.0,
       "status": "sent",
       "dueDate": "2024-02-15",
-      "lineItems": [
-        { "description": "Web Design", "quantity": 1, "rate": 1500.00 }
-      ]
+      "lineItems": [{ "description": "Web Design", "quantity": 1, "rate": 1500.0 }]
     }
   ]
 }
 ```
 
 The `_meta` descriptions should:
+
 - Use plain, non-technical language
 - Explain what each model represents in the context of the user's product
 - Describe relationships in terms of "contains", "belongs to", "links to", etc.
@@ -165,7 +165,6 @@ After creating data.json, generate `product/sections/[section-id]/types.ts` base
    - Objects → Create a named interface
 
 2. **Use union types for status/enum fields:**
-
    - If a field like `status` has known values, use a union: `'draft' | 'sent' | 'paid' | 'overdue'`
 
    - Base this on the spec and the variety in sample data
@@ -186,20 +185,20 @@ Example types.ts:
 // =============================================================================
 
 export interface LineItem {
-  description: string
-  quantity: number
-  rate: number
+  description: string;
+  quantity: number;
+  rate: number;
 }
 
 export interface Invoice {
-  id: string
-  invoiceNumber: string
-  clientName: string
-  clientEmail: string
-  total: number
-  status: 'draft' | 'sent' | 'paid' | 'overdue'
-  dueDate: string
-  lineItems: LineItem[]
+  id: string;
+  invoiceNumber: string;
+  clientName: string;
+  clientEmail: string;
+  total: number;
+  status: 'draft' | 'sent' | 'paid' | 'overdue';
+  dueDate: string;
+  lineItems: LineItem[];
 }
 
 // =============================================================================
@@ -208,17 +207,17 @@ export interface Invoice {
 
 export interface InvoiceListProps {
   /** The list of invoices to display */
-  invoices: Invoice[]
+  invoices: Invoice[];
   /** Called when user wants to view an invoice's details */
-  onView?: (id: string) => void
+  onView?: (id: string) => void;
   /** Called when user wants to edit an invoice */
-  onEdit?: (id: string) => void
+  onEdit?: (id: string) => void;
   /** Called when user wants to delete an invoice */
-  onDelete?: (id: string) => void
+  onDelete?: (id: string) => void;
   /** Called when user wants to archive an invoice */
-  onArchive?: (id: string) => void
+  onArchive?: (id: string) => void;
   /** Called when user wants to create a new invoice */
-  onCreate?: () => void
+  onCreate?: () => void;
 }
 ```
 

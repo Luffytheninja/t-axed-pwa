@@ -1,12 +1,12 @@
-import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AppLayout } from '@/components/AppLayout'
-import { EmptyState } from '@/components/EmptyState'
-import { StepIndicator, type StepStatus } from '@/components/StepIndicator'
-import { NextPhaseButton } from '@/components/NextPhaseButton'
-import { loadProductData } from '@/lib/product-loader'
-import { ChevronRight, Layout } from 'lucide-react'
+import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AppLayout } from '@/components/AppLayout';
+import { EmptyState } from '@/components/EmptyState';
+import { StepIndicator, type StepStatus } from '@/components/StepIndicator';
+import { NextPhaseButton } from '@/components/NextPhaseButton';
+import { loadProductData } from '@/lib/product-loader';
+import { ChevronRight, Layout } from 'lucide-react';
 
 // Map Tailwind color names to actual color values for preview
 const colorMap: Record<string, { light: string; base: string; dark: string }> = {
@@ -32,47 +32,44 @@ const colorMap: Record<string, { light: string; base: string; dark: string }> = 
   zinc: { light: '#d4d4d8', base: '#71717a', dark: '#52525b' },
   neutral: { light: '#d4d4d4', base: '#737373', dark: '#525252' },
   stone: { light: '#d6d3d1', base: '#78716c', dark: '#57534e' },
-}
+};
 
 /**
  * Determine the status of each step on the Design page
  * Steps: 1. Design Tokens, 2. Shell Design
  */
-function getDesignPageStepStatuses(
-  hasDesignSystem: boolean,
-  hasShell: boolean
-): StepStatus[] {
-  const statuses: StepStatus[] = []
+function getDesignPageStepStatuses(hasDesignSystem: boolean, hasShell: boolean): StepStatus[] {
+  const statuses: StepStatus[] = [];
 
   // Step 1: Design Tokens
   if (hasDesignSystem) {
-    statuses.push('completed')
+    statuses.push('completed');
   } else {
-    statuses.push('current')
+    statuses.push('current');
   }
 
   // Step 2: Shell
   if (hasShell) {
-    statuses.push('completed')
+    statuses.push('completed');
   } else if (hasDesignSystem) {
-    statuses.push('current')
+    statuses.push('current');
   } else {
-    statuses.push('upcoming')
+    statuses.push('upcoming');
   }
 
-  return statuses
+  return statuses;
 }
 
 export function DesignPage() {
-  const productData = useMemo(() => loadProductData(), [])
-  const designSystem = productData.designSystem
-  const shell = productData.shell
+  const productData = useMemo(() => loadProductData(), []);
+  const designSystem = productData.designSystem;
+  const shell = productData.shell;
 
-  const hasDesignSystem = !!(designSystem?.colors || designSystem?.typography)
-  const hasShell = !!shell?.spec
-  const allStepsComplete = hasDesignSystem && hasShell
+  const hasDesignSystem = !!(designSystem?.colors || designSystem?.typography);
+  const hasShell = !!shell?.spec;
+  const allStepsComplete = hasDesignSystem && hasShell;
 
-  const stepStatuses = getDesignPageStepStatuses(hasDesignSystem, hasShell)
+  const stepStatuses = getDesignPageStepStatuses(hasDesignSystem, hasShell);
 
   return (
     <AppLayout>
@@ -106,18 +103,9 @@ export function DesignPage() {
                       Colors
                     </h4>
                     <div className="grid grid-cols-3 gap-6">
-                      <ColorSwatch
-                        label="Primary"
-                        colorName={designSystem.colors.primary}
-                      />
-                      <ColorSwatch
-                        label="Secondary"
-                        colorName={designSystem.colors.secondary}
-                      />
-                      <ColorSwatch
-                        label="Neutral"
-                        colorName={designSystem.colors.neutral}
-                      />
+                      <ColorSwatch label="Primary" colorName={designSystem.colors.primary} />
+                      <ColorSwatch label="Secondary" colorName={designSystem.colors.secondary} />
+                      <ColorSwatch label="Neutral" colorName={designSystem.colors.neutral} />
                     </div>
                   </div>
                 )}
@@ -154,7 +142,11 @@ export function DesignPage() {
                 {/* Edit hint */}
                 <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5">
                   <p className="text-xs text-stone-500 dark:text-stone-400">
-                    Run <code className="font-mono text-stone-700 dark:text-stone-300">/design-tokens</code> to update
+                    Run{' '}
+                    <code className="font-mono text-stone-700 dark:text-stone-300">
+                      /design-tokens
+                    </code>{' '}
+                    to update
                   </p>
                 </div>
               </CardContent>
@@ -190,19 +182,24 @@ export function DesignPage() {
                     <ul className="space-y-1">
                       {shell.spec.navigationItems.map((item, index) => {
                         // Parse markdown-style bold: **text** → <strong>text</strong>
-                        const parts = item.split(/\*\*([^*]+)\*\*/)
+                        const parts = item.split(/\*\*([^*]+)\*\*/);
                         return (
-                          <li key={index} className="flex items-center gap-2 text-stone-700 dark:text-stone-300">
+                          <li
+                            key={index}
+                            className="flex items-center gap-2 text-stone-700 dark:text-stone-300"
+                          >
                             <span className="w-1 h-1 rounded-full bg-stone-400 dark:bg-stone-500" />
                             {parts.map((part, i) =>
                               i % 2 === 1 ? (
-                                <strong key={i} className="font-semibold">{part}</strong>
+                                <strong key={i} className="font-semibold">
+                                  {part}
+                                </strong>
                               ) : (
                                 <span key={i}>{part}</span>
-                              )
+                              ),
                             )}
                           </li>
-                        )
+                        );
                       })}
                     </ul>
                   </div>
@@ -217,13 +214,19 @@ export function DesignPage() {
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-md bg-stone-200 dark:bg-stone-700 flex items-center justify-center">
-                          <Layout className="w-4 h-4 text-stone-600 dark:text-stone-300" strokeWidth={1.5} />
+                          <Layout
+                            className="w-4 h-4 text-stone-600 dark:text-stone-300"
+                            strokeWidth={1.5}
+                          />
                         </div>
                         <span className="font-medium text-stone-700 dark:text-stone-300 group-hover:text-stone-900 dark:group-hover:text-stone-100">
                           View Shell Design
                         </span>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500" strokeWidth={1.5} />
+                      <ChevronRight
+                        className="w-4 h-4 text-stone-400 dark:text-stone-500"
+                        strokeWidth={1.5}
+                      />
                     </Link>
                   </div>
                 )}
@@ -231,7 +234,11 @@ export function DesignPage() {
                 {/* Edit hint */}
                 <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5">
                   <p className="text-xs text-stone-500 dark:text-stone-400">
-                    Run <code className="font-mono text-stone-700 dark:text-stone-300">/design-shell</code> to update
+                    Run{' '}
+                    <code className="font-mono text-stone-700 dark:text-stone-300">
+                      /design-shell
+                    </code>{' '}
+                    to update
                   </p>
                 </div>
               </CardContent>
@@ -247,16 +254,16 @@ export function DesignPage() {
         )}
       </div>
     </AppLayout>
-  )
+  );
 }
 
 interface ColorSwatchProps {
-  label: string
-  colorName: string
+  label: string;
+  colorName: string;
 }
 
 function ColorSwatch({ label, colorName }: ColorSwatchProps) {
-  const colors = colorMap[colorName] || colorMap.stone
+  const colors = colorMap[colorName] || colorMap.stone;
 
   return (
     <div>
@@ -280,5 +287,5 @@ function ColorSwatch({ label, colorName }: ColorSwatchProps) {
       <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{label}</p>
       <p className="text-xs text-stone-500 dark:text-stone-400">{colorName}</p>
     </div>
-  )
+  );
 }

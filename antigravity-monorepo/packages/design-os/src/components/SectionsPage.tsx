@@ -1,26 +1,31 @@
-import { useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AppLayout } from '@/components/AppLayout'
-import { EmptyState } from '@/components/EmptyState'
-import { PhaseWarningBanner } from '@/components/PhaseWarningBanner'
-import { NextPhaseButton } from '@/components/NextPhaseButton'
-import { loadProductData } from '@/lib/product-loader'
-import { getSectionScreenDesigns, getSectionScreenshots, hasSectionSpec, hasSectionData } from '@/lib/section-loader'
-import { ChevronRight, Check, Circle } from 'lucide-react'
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AppLayout } from '@/components/AppLayout';
+import { EmptyState } from '@/components/EmptyState';
+import { PhaseWarningBanner } from '@/components/PhaseWarningBanner';
+import { NextPhaseButton } from '@/components/NextPhaseButton';
+import { loadProductData } from '@/lib/product-loader';
+import {
+  getSectionScreenDesigns,
+  getSectionScreenshots,
+  hasSectionSpec,
+  hasSectionData,
+} from '@/lib/section-loader';
+import { ChevronRight, Check, Circle } from 'lucide-react';
 
 interface SectionProgress {
-  hasSpec: boolean
-  hasData: boolean
-  hasScreenDesigns: boolean
-  screenDesignCount: number
-  hasScreenshots: boolean
-  screenshotCount: number
+  hasSpec: boolean;
+  hasData: boolean;
+  hasScreenDesigns: boolean;
+  screenDesignCount: number;
+  hasScreenshots: boolean;
+  screenshotCount: number;
 }
 
 function getSectionProgress(sectionId: string): SectionProgress {
-  const screenDesigns = getSectionScreenDesigns(sectionId)
-  const screenshots = getSectionScreenshots(sectionId)
+  const screenDesigns = getSectionScreenDesigns(sectionId);
+  const screenshots = getSectionScreenshots(sectionId);
   return {
     hasSpec: hasSectionSpec(sectionId),
     hasData: hasSectionData(sectionId),
@@ -28,29 +33,29 @@ function getSectionProgress(sectionId: string): SectionProgress {
     screenDesignCount: screenDesigns.length,
     hasScreenshots: screenshots.length > 0,
     screenshotCount: screenshots.length,
-  }
+  };
 }
 
 export function SectionsPage() {
-  const navigate = useNavigate()
-  const productData = useMemo(() => loadProductData(), [])
+  const navigate = useNavigate();
+  const productData = useMemo(() => loadProductData(), []);
 
-  const sections = productData.roadmap?.sections || []
+  const sections = productData.roadmap?.sections || [];
 
   // Calculate progress for each section
   const sectionProgressMap = useMemo(() => {
-    const map: Record<string, SectionProgress> = {}
+    const map: Record<string, SectionProgress> = {};
     for (const section of sections) {
-      map[section.id] = getSectionProgress(section.id)
+      map[section.id] = getSectionProgress(section.id);
     }
-    return map
-  }, [sections])
+    return map;
+  }, [sections]);
 
   // Count completed sections (those with spec, data, AND screen designs)
-  const completedSections = sections.filter(s => {
-    const p = sectionProgressMap[s.id]
-    return p?.hasSpec && p?.hasData && p?.hasScreenDesigns
-  }).length
+  const completedSections = sections.filter((s) => {
+    const p = sectionProgressMap[s.id];
+    return p?.hasSpec && p?.hasData && p?.hasScreenDesigns;
+  }).length;
 
   return (
     <AppLayout>
@@ -61,7 +66,8 @@ export function SectionsPage() {
             Sections
           </h1>
           <p className="text-stone-600 dark:text-stone-400">
-            Design each section of your product with specifications, sample data, and screen designs.
+            Design each section of your product with specifications, sample data, and screen
+            designs.
           </p>
           {sections.length > 0 && (
             <p className="text-sm text-stone-500 dark:text-stone-400 mt-2">
@@ -86,8 +92,9 @@ export function SectionsPage() {
             <CardContent className="p-0">
               <ul className="divide-y divide-stone-200 dark:divide-stone-700">
                 {sections.map((section) => {
-                  const progress = sectionProgressMap[section.id]
-                  const isComplete = progress?.hasSpec && progress?.hasData && progress?.hasScreenDesigns
+                  const progress = sectionProgressMap[section.id];
+                  const isComplete =
+                    progress?.hasSpec && progress?.hasData && progress?.hasScreenDesigns;
 
                   return (
                     <li key={section.id}>
@@ -100,7 +107,10 @@ export function SectionsPage() {
                           <div className="shrink-0 mt-0.5">
                             {isComplete ? (
                               <div className="w-6 h-6 rounded-full bg-lime-100 dark:bg-lime-900/30 flex items-center justify-center">
-                                <Check className="w-3.5 h-3.5 text-lime-600 dark:text-lime-400" strokeWidth={2.5} />
+                                <Check
+                                  className="w-3.5 h-3.5 text-lime-600 dark:text-lime-400"
+                                  strokeWidth={2.5}
+                                />
                               </div>
                             ) : (
                               <div className="w-6 h-6 rounded-full bg-stone-200 dark:bg-stone-700 flex items-center justify-center">
@@ -124,11 +134,19 @@ export function SectionsPage() {
                               <ProgressDot label="Spec" done={progress?.hasSpec} />
                               <ProgressDot label="Data" done={progress?.hasData} />
                               <ProgressDot
-                                label={progress?.screenDesignCount ? `${progress.screenDesignCount} screen design${progress.screenDesignCount !== 1 ? 's' : ''}` : 'Screen Designs'}
+                                label={
+                                  progress?.screenDesignCount
+                                    ? `${progress.screenDesignCount} screen design${progress.screenDesignCount !== 1 ? 's' : ''}`
+                                    : 'Screen Designs'
+                                }
                                 done={progress?.hasScreenDesigns}
                               />
                               <ProgressDot
-                                label={progress?.screenshotCount ? `${progress.screenshotCount} screenshot${progress.screenshotCount !== 1 ? 's' : ''}` : 'Screenshots'}
+                                label={
+                                  progress?.screenshotCount
+                                    ? `${progress.screenshotCount} screenshot${progress.screenshotCount !== 1 ? 's' : ''}`
+                                    : 'Screenshots'
+                                }
                                 done={progress?.hasScreenshots}
                                 optional
                               />
@@ -136,10 +154,13 @@ export function SectionsPage() {
                           </div>
                         </div>
 
-                        <ChevronRight className="w-4 h-4 text-stone-400 dark:text-stone-500 flex-shrink-0" strokeWidth={1.5} />
+                        <ChevronRight
+                          className="w-4 h-4 text-stone-400 dark:text-stone-500 flex-shrink-0"
+                          strokeWidth={1.5}
+                        />
                       </button>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </CardContent>
@@ -152,24 +173,26 @@ export function SectionsPage() {
         )}
       </div>
     </AppLayout>
-  )
+  );
 }
 
 interface ProgressDotProps {
-  label: string
-  done?: boolean
-  optional?: boolean
+  label: string;
+  done?: boolean;
+  optional?: boolean;
 }
 
 function ProgressDot({ label, done, optional }: ProgressDotProps) {
   return (
-    <span className={`flex items-center gap-1 text-xs ${
-      done
-        ? 'text-stone-700 dark:text-stone-300'
-        : optional
-          ? 'text-stone-300 dark:text-stone-600'
-          : 'text-stone-400 dark:text-stone-500'
-    }`}>
+    <span
+      className={`flex items-center gap-1 text-xs ${
+        done
+          ? 'text-stone-700 dark:text-stone-300'
+          : optional
+            ? 'text-stone-300 dark:text-stone-600'
+            : 'text-stone-400 dark:text-stone-500'
+      }`}
+    >
       {done ? (
         <Check className="w-3 h-3 text-lime-600 dark:text-lime-400" strokeWidth={2.5} />
       ) : (
@@ -177,5 +200,5 @@ function ProgressDot({ label, done, optional }: ProgressDotProps) {
       )}
       {label}
     </span>
-  )
+  );
 }

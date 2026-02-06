@@ -1,0 +1,6 @@
+{
+    "installCommand": "pnpm install",
+    "buildCommand": "turbo run build --filter=book-ngn",
+    "outputDirectory": "apps/book-ngn/.next",
+    "framework": "nextjs"
+}

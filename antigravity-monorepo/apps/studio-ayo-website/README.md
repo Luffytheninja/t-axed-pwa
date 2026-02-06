@@ -38,6 +38,7 @@ npm run preview
 ```
 
 The development server will run at:
+
 - Local: http://localhost:5173/ (or next available port)
 
 ## 📁 Project Structure
@@ -83,6 +84,7 @@ The website follows these core principles:
 ## 📄 Pages
 
 ### Home (`/`)
+
 - Hero section with background imagery
 - Positioning/About
 - Services overview
@@ -93,14 +95,18 @@ The website follows these core principles:
 - Footer
 
 ### Work (`/work`)
+
 Tiered case study listing:
+
 - **Core Case Studies**: Full end-to-end projects
 - **Studio Proof**: Smaller scope projects showing capability
 - **Research & Exploration**: Ongoing investigations
 - **Selected Works**: Archive of earlier projects
 
 ### Case Study Detail (`/work/:id`)
+
 Individual case study pages with:
+
 - Hero with full-screen imagery
 - Project snapshot
 - Challenge section
@@ -111,6 +117,7 @@ Individual case study pages with:
 ## 🎭 Animation System
 
 All animations use Framer Motion with consistent easing:
+
 - **Entrance**: fade + translateY
 - **Buttons**: subtle scale + opacity
 - **Images**: lift + scale on hover
@@ -169,6 +176,7 @@ Edit `src/data/caseStudies.js`:
 ### Colors
 
 Edit `tailwind.config.js`:
+
 ```javascript
 colors: {
   'warm-white': '#FAFAF9',
@@ -179,12 +187,14 @@ colors: {
 ### Typography
 
 The site uses **Inter** font from Google Fonts. To change:
+
 1. Update `index.html` font link
 2. Update `tailwind.config.js` font family
 
 ### Background Images
 
 Replace placeholder Unsplash images with your own:
+
 - Hero: `src/components/Hero.jsx`
 - Case studies: `src/data/caseStudies.js`
 
@@ -217,6 +227,7 @@ No environment variables required for basic functionality. If implementing form 
 ## 📱 Responsive Design
 
 The site is fully responsive:
+
 - Mobile: < 768px
 - Tablet: 768px - 1024px
 - Desktop: > 1024px
@@ -234,6 +245,7 @@ The site is fully responsive:
 ### Scroll Behavior
 
 The site uses `scroll-snap` for full-height sections. To adjust:
+
 ```css
 /* src/index.css */
 html {
@@ -250,6 +262,7 @@ html {
 ## 📊 SEO
 
 Update `index.html` for production:
+
 - Title tag
 - Meta description
 - Open Graph tags

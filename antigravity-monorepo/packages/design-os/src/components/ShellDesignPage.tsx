@@ -1,60 +1,68 @@
-import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, PanelLeft, Maximize2, GripVertical, Smartphone, Tablet, Monitor } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { ThemeToggle } from '@/components/ThemeToggle'
-import { loadShellPreview } from '@/lib/shell-loader'
-import React from 'react'
+import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+  ArrowLeft,
+  PanelLeft,
+  Maximize2,
+  GripVertical,
+  Smartphone,
+  Tablet,
+  Monitor,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { loadShellPreview } from '@/lib/shell-loader';
+import React from 'react';
 
-const MIN_WIDTH = 320
-const DEFAULT_WIDTH_PERCENT = 100
+const MIN_WIDTH = 320;
+const DEFAULT_WIDTH_PERCENT = 100;
 
 export function ShellDesignPage() {
-  const navigate = useNavigate()
-  const [widthPercent, setWidthPercent] = useState(DEFAULT_WIDTH_PERCENT)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const isDragging = useRef(false)
+  const navigate = useNavigate();
+  const [widthPercent, setWidthPercent] = useState(DEFAULT_WIDTH_PERCENT);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
 
   // Handle resize drag
   const handleMouseDown = useCallback(() => {
-    isDragging.current = true
+    isDragging.current = true;
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current || !containerRef.current) return
+      if (!isDragging.current || !containerRef.current) return;
 
-      const containerRect = containerRef.current.getBoundingClientRect()
-      const containerWidth = containerRect.width
-      const containerCenter = containerRect.left + containerWidth / 2
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const containerWidth = containerRect.width;
+      const containerCenter = containerRect.left + containerWidth / 2;
 
       // Calculate distance from center
-      const distanceFromCenter = Math.abs(e.clientX - containerCenter)
-      const maxDistance = containerWidth / 2
+      const distanceFromCenter = Math.abs(e.clientX - containerCenter);
+      const maxDistance = containerWidth / 2;
 
       // Convert to percentage (distance from center * 2 = total width)
-      let newWidthPercent = (distanceFromCenter / maxDistance) * 100
+      let newWidthPercent = (distanceFromCenter / maxDistance) * 100;
 
       // Clamp between min width and 100%
-      const minPercent = (MIN_WIDTH / containerWidth) * 100
-      newWidthPercent = Math.max(minPercent, Math.min(100, newWidthPercent))
+      const minPercent = (MIN_WIDTH / containerWidth) * 100;
+      newWidthPercent = Math.max(minPercent, Math.min(100, newWidthPercent));
 
-      setWidthPercent(newWidthPercent)
-    }
+      setWidthPercent(newWidthPercent);
+    };
 
     const handleMouseUp = () => {
-      isDragging.current = false
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-      document.body.style.cursor = ''
-      document.body.style.userSelect = ''
-    }
+      isDragging.current = false;
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
 
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseup', handleMouseUp)
-    document.body.style.cursor = 'ew-resize'
-    document.body.style.userSelect = 'none'
-  }, [])
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.body.style.cursor = 'ew-resize';
+    document.body.style.userSelect = 'none';
+  }, []);
 
-  const previewWidth = `${widthPercent}%`
+  const previewWidth = `${widthPercent}%`;
 
   return (
     <div className="h-screen bg-stone-100 dark:bg-stone-900 animate-fade-in flex flex-col overflow-hidden">
@@ -144,7 +152,10 @@ export function ShellDesignPage() {
           onMouseDown={handleMouseDown}
         >
           <div className="w-1 h-16 rounded-full bg-stone-300 dark:bg-stone-600 group-hover:bg-stone-400 dark:group-hover:bg-stone-500 transition-colors flex items-center justify-center">
-            <GripVertical className="w-3 h-3 text-stone-500 dark:text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity" strokeWidth={2} />
+            <GripVertical
+              className="w-3 h-3 text-stone-500 dark:text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity"
+              strokeWidth={2}
+            />
           </div>
         </div>
 
@@ -166,12 +177,15 @@ export function ShellDesignPage() {
           onMouseDown={handleMouseDown}
         >
           <div className="w-1 h-16 rounded-full bg-stone-300 dark:bg-stone-600 group-hover:bg-stone-400 dark:group-hover:bg-stone-500 transition-colors flex items-center justify-center">
-            <GripVertical className="w-3 h-3 text-stone-500 dark:text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity" strokeWidth={2} />
+            <GripVertical
+              className="w-3 h-3 text-stone-500 dark:text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity"
+              strokeWidth={2}
+            />
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 /**
@@ -179,53 +193,53 @@ export function ShellDesignPage() {
  * Syncs theme with parent window via localStorage
  */
 export function ShellDesignFullscreen() {
-  const shellPreviewLoader = loadShellPreview()
+  const shellPreviewLoader = loadShellPreview();
 
   const ShellPreviewComponent = useMemo(() => {
-    if (!shellPreviewLoader) return null
-    return React.lazy(shellPreviewLoader)
-  }, [shellPreviewLoader])
+    if (!shellPreviewLoader) return null;
+    return React.lazy(shellPreviewLoader);
+  }, [shellPreviewLoader]);
 
   // Sync theme with parent window
   useEffect(() => {
     const applyTheme = () => {
-      const theme = localStorage.getItem('theme') || 'system'
-      const root = document.documentElement
+      const theme = localStorage.getItem('theme') || 'system';
+      const root = document.documentElement;
 
       if (theme === 'system') {
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        root.classList.toggle('dark', systemDark)
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        root.classList.toggle('dark', systemDark);
       } else {
-        root.classList.toggle('dark', theme === 'dark')
+        root.classList.toggle('dark', theme === 'dark');
       }
-    }
+    };
 
     // Apply on mount
-    applyTheme()
+    applyTheme();
 
     // Listen for storage changes (from parent window)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'theme') {
-        applyTheme()
+        applyTheme();
       }
-    }
-    window.addEventListener('storage', handleStorageChange)
+    };
+    window.addEventListener('storage', handleStorageChange);
 
     // Also poll for changes since storage event doesn't fire in same window
-    const interval = setInterval(applyTheme, 100)
+    const interval = setInterval(applyTheme, 100);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange)
-      clearInterval(interval)
-    }
-  }, [])
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
 
   if (!ShellPreviewComponent) {
     return (
       <div className="h-screen flex items-center justify-center bg-background">
         <p className="text-stone-600 dark:text-stone-400">Shell preview not found.</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -238,5 +252,5 @@ export function ShellDesignFullscreen() {
     >
       <ShellPreviewComponent />
     </Suspense>
-  )
+  );
 }
