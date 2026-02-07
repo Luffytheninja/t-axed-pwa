@@ -1,36 +1,22 @@
-# Dependencies
-node_modules/
-.pnpm-store/
-__pycache__/
-*.pyc
-
-# Build outputs
-dist/
-build/
-out/
-.next/
-.turbo/
-
-# System & IDE files
-.DS_Store
-Thumbs.db
-*.log
-.vscode/
-.idea/
-*.code-workspace
-*.swp
-
-# Environment variables
+node_modules
+dist
 .env
-.env.local
-.env.*.local
-
-# Bloat & Temporary Files
-*.zip
-*.tar
-*.gz
-*.rar
-ERROR_LOG.md
-t_axed_temp/
-ReviewAlerts.tsx
+.DS_Store
+*.log
+.gemini
+brain
+payski-demo
+payski_mobile
+.turbo
+**/.next
+# Root temp/backup folders
+/archive/
+/luffyworld-repo/
+/monorepo_deploy/
+/polished-purfection-site/
+/t_axed_deploy/
+/token-file/
+/t_axed_temp/
+errors.txt
+Antigravity Experiments.code-workspace
 .agent/
