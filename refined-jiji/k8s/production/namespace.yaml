@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: refined-jiji-prod
-  labels:
-    name: refined-jiji-prod
-    environment: production

@@ -1,3 +1,4 @@
+# Standard Exclusions
 node_modules
 dist
 .env
@@ -9,25 +10,25 @@ payski-demo
 payski_mobile
 .turbo
 **/.next
-# Root temp/backup folders
+**/.turbo
+**/node_modules
+
+# Root Bloat Folders (Legacy/Backup/Deploy)
 /archive/
+/Luffy/
 /luffyworld-repo/
+/mom-c/
 /monorepo_deploy/
+/opencode-ai-setup/
+/polished purfection/
 /polished-purfection-site/
+/refined-jiji/
 /t_axed_deploy/
 /token-file/
 /t_axed_temp/
-errors.txt
-Antigravity Experiments.code-workspace
-.agent/
+/Website/
 
-# Aggressive Bloat Exclusions
-**/node_modules/
-**/dist/
-**/build/
-**/out/
-**/.next/
-**/.turbo/
+# Deep Bloat Patterns
 **/netlify-deploy/
 **/*.glb
 **/*.mp4
@@ -43,13 +44,13 @@ Antigravity Experiments.code-workspace
 **/tech fantasy 3d assets/
 **/bass fantasy 3d assets/
 **/altered state 3d assets/
-**/public/hero.png
-**/public/*.png
-**/public/*.jpg
-**/public/*.jpeg
-**/public/*.gif
-**/public/*.svg
-# Re-include small SVGs if needed, but for now let's be safe.
+
+# Re-include essential assets
 !**/public/pwa-icon.svg
 !**/public/favicon.ico
 !**/public/manifest.json
+
+# Tooling
+errors.txt
+Antigravity Experiments.code-workspace
+.agent/
