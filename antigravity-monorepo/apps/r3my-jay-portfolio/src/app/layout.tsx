@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import Navigation from '@/components/Navigation';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -80,36 +81,7 @@ export default function RootLayout({
 
         <main className="min-h-screen">{children}</main>
 
-        {/* Navigation */}
-        <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-glass px-8 py-4 rounded-full border border-accent/20">
-          <ul className="flex items-center gap-8 text-xs font-bold uppercase tracking-widest">
-            <li>
-              <a href="/" className="hover:text-accent transition-colors">
-                THE VOID
-              </a>
-            </li>
-            <li>
-              <a href="/discography" className="hover:text-accent transition-colors">
-                DISCOGRAPHY
-              </a>
-            </li>
-            <li>
-              <a href="/gallery" className="hover:text-accent transition-colors">
-                GALLERY
-              </a>
-            </li>
-            <li>
-              <a href="/supply" className="hover:text-accent transition-colors">
-                SUPPLY
-              </a>
-            </li>
-            <li>
-              <a href="/archive" className="hover:text-accent transition-colors">
-                ARCHIVE
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <Navigation />
       </body>
     </html>
   );
