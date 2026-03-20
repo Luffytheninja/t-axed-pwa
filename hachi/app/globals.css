@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #000000;
+  --primary: #000000;
+  --accent: #333333;
+  --neutral: #F5F5F5;
+  
+  --status-needed: #666666;
+  --status-buying: #000000;
+  --status-bought: #000000;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-neutral: var(--neutral);
+  --color-needed: var(--status-needed);
+  --color-buying: var(--status-buying);
+  --color-bought: var(--status-bought);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #FFFFFF;
+    --accent: #CCCCCC;
+    --neutral: #1A1A1A;
+    --status-needed: #999999;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
