@@ -11,53 +11,70 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function ProjectCard({ project, className }: { project: Project; className?: string }) {
+const aspectRatioMap: Record<string, string> = {
+  portrait: 'aspect-[3/4.5]',
+  landscape: 'aspect-[4/3]',
+  square: 'aspect-[1/1]',
+};
+
+export function ProjectCard({ 
+  project, 
+  className,
+  isBento = false 
+}: { 
+  project: Project; 
+  className?: string;
+  isBento?: boolean;
+}) {
+  const ratioClass = aspectRatioMap[project.aspectRatio ?? 'landscape'] ?? 'aspect-[4/3]';
+
   return (
-    <Link href={`/work/${project.id}`} className="block group">
+    <Link href={`/work/${project.id}`} className="block group w-full h-full">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.21, 0.45, 0.32, 0.9] }}
-        className={cn('flex flex-col gap-6', className)}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className={cn('flex flex-col h-full', className)}
       >
-        {/* Image Container */}
-        <div className="relative overflow-hidden bg-[#EFEEEC] transition-transform duration-700 ease-out group-hover:scale-[1.01] aspect-[4/3]">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-1000 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+        {/* Modular Metadata — Header Style */}
+        <div className="flex justify-between items-baseline mb-6">
+          <span className="text-micro opacity-40">{project.id.toUpperCase()}</span>
+          <span className="text-micro font-bold">{project.year}</span>
         </div>
 
-        {/* Modular Metadata Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-border/40">
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-muted tracking-widest uppercase">Title</span>
-            <h3 className="text-xs font-semibold tracking-tight uppercase truncate">
-              {project.title}
-            </h3>
+        {/* Image Viewport */}
+        <div
+          className={cn(
+            'relative overflow-hidden bg-transparent transition-swiss flex-grow flex items-center justify-center p-4 md:p-8',
+            !isBento && ratioClass
+          )}
+        >
+          <div className="relative w-full h-full transition-swiss group-hover:scale-[1.03]">
+             <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority={false}
+            />
           </div>
+        </div>
 
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-muted tracking-widest uppercase">Date</span>
-            <span className="text-xs font-medium uppercase">{project.year}</span>
+        {/* Technical Metadata Footer */}
+        <div className="mt-6 pt-6 border-t border-black/5 grid grid-cols-2 gap-4">
+          <div className="flex flex-col min-w-0">
+            <span className="text-[9px] uppercase tracking-wider text-muted mb-1">Project</span>
+            <h3 className="text-label truncate w-full">{project.title}</h3>
           </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-muted tracking-widest uppercase">Medium</span>
-            <span className="text-xs font-medium uppercase truncate">{project.medium}</span>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <span className="text-[10px] text-muted tracking-widest uppercase">Dimensions</span>
-            <span className="text-xs font-medium uppercase">{project.dimensions || 'N/A'}</span>
+          <div className="flex flex-col items-end min-w-0 text-right">
+            <span className="text-[9px] uppercase tracking-wider text-muted mb-1">Category</span>
+            <span className="text-label truncate w-full">{project.category}</span>
           </div>
         </div>
       </motion.div>
     </Link>
   );
 }
+

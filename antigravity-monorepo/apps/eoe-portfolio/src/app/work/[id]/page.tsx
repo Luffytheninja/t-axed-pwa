@@ -2,20 +2,47 @@ import { projects } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
-export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
+type Props = { params: Promise<{ id: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const project = projects.find((p) => p.id === id);
+  if (!project) return {};
+  return {
+    title: project.title,
+    description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      images: [{ url: project.image }],
+    },
+  };
+}
 
+export default async function ProjectPage({ params }: Props) {
+  const { id } = await params;
+  const project = projects.find((p) => p.id === id);
   if (!project) notFound();
+
+  const currentIndex = projects.findIndex((p) => p.id === id);
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+
+  const categoryPaths: Record<string, string> = {
+    photography: '/photography',
+    painting: '/painting',
+    design: '/design',
+  };
+  const backPath = categoryPaths[project!.category] ?? '/';
 
   return (
     <div className="pt-48 pb-64 px-6 max-w-[1400px] mx-auto">
       <Link
-        href="/"
+        href={backPath}
         className="text-micro text-muted hover:text-foreground transition-colors mb-24 block"
       >
-        ← Back to Works
+        ← Back to {project!.category.charAt(0).toUpperCase() + project!.category.slice(1)}
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-24">
@@ -58,19 +85,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
         {/* Project High-Res Image */}
         <div className="md:col-span-8 order-1 md:order-2">
-          <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+          <div className="relative w-full overflow-hidden bg-muted/40">
             <Image
               src={project.image}
               alt={project.title}
-              fill
-              className="object-cover"
+              width={1600}
+              height={1000}
+              className="w-full h-auto object-contain"
               priority
               sizes="(max-width: 1400px) 100vw, 80vw"
             />
           </div>
 
           {/* Detailed Narrative Section */}
-          <div className="mt-32 max-w-2xl">
+          <div className="mt-24 max-w-2xl">
             <h3 className="text-micro text-muted mb-8 tracking-[0.2em]">The Narrative</h3>
             <p className="text-xl leading-relaxed">
               This work represents a pivotal moment in the EOE collection, where the boundaries
@@ -87,10 +115,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <div>
           <span className="text-micro text-muted block mb-4">Next Project</span>
           <Link
-            href={`/work/${projects[0].id}`}
+            href={`/work/${nextProject.id}`}
             className="text-3xl hover:opacity-50 transition-opacity tracking-tight"
           >
-            {projects[0].title}
+            {nextProject.title}
           </Link>
         </div>
         <Link href="/" className="text-micro hover:opacity-50 transition-opacity">
